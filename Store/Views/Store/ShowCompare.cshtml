@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Store.Models.Tovar>
+@helper Truncate(string input, int length)
+ {
+    if (input.Length <= length) {
+        @input
+    } else {
+        @input.Substring(0, length)<text>...</text>
+    }
+}
+@{
+    ViewBag.Title = "ShowCompare";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<int> temp = ViewBag.listCompare;
+}
+
+<h2>Сравнение выбранных товаров</h2>
+@if (temp.Count != 0){
+<div class="buttoncomparedel">@Html.ActionLink("Удалить все товары", "DeleteAllCompare", "Store")</div>
+}
+<br />
+@if (temp.Count!=0){
+    <table class="compareTab">
+        <tr>
+            <th>Картинка</th>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Описание</th>
+            <th></th>
+        </tr>
+    @foreach(var item in Model){
+        foreach (int tt in temp)
+        {
+            if(item.TovarId==tt){
+            <tr>
+                <td><img src="@Url.Content(item.Image)"/></td>
+                <td>@Truncate(item.Title, 25)</td>
+                <td>@item.Price</td>
+                <td>@item.Amount</td>
+                <td>@Truncate(item.Description, 50)</td>
+                <td><a href="/Store/DeleteCompare?id=@tt">Удалить из сравнения</a></td>
+            </tr>
+            }
+        }
+    }
+    </table>
+}
+else {
+    <p>Выберите товары!</p>
+    <br />
+    <div class="buttoncomparedel"><a href="/Store/Index/">На главную</a></div>
+}

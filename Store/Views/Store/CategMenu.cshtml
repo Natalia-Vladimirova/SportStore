@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Store.Models.Categ>
+<ul id="sidebarlist">
+    @foreach (var categ in Model)
+    {
+        <li>@Html.ActionLink(categ.Category,"Browse", "Store",new { param = categ.CategId }, null)
+        </li>
+    }
+</ul>

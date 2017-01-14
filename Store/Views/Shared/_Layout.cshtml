@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/modernizr-2.5.3.js")" type="text/javascript"></script>
+</head>
+<body>
+<!--begin #container-->
+<div id="container">
+<!-- begin #header -->
+<div id="header">
+    <div>
+        <div class="items">             
+            <ul> 
+                <li>@Html.Partial("_LogOnPartial")</li>
+                <li> @{Html.RenderAction("CartSummary", "ShoppingCart");} </li>  
+            </ul>
+        </div>
+    
+        <div class="logo">Handmade <span>Store</span>
+            <img src="/Content/images/cart.png" />
+        </div>
+    </div>
+
+    <br class="clearfloat" />
+
+    <div id="navcontainer">
+        <ul id="navlist">
+           <li class="first"><a href="@Url.Content("~")" id="current">Главная</a></li>
+           <li>@Html.ActionLink("Контакты", "About", "Home")</li>
+            <li>@Html.ActionLink("XML", "Myxml", "Store")</li>
+            @if(Request.IsAuthenticated) {
+                <li><a href="@Url.Content("~/StoreManager/")">Администратор</a></li>
+            }
+           <li><div class="search">
+               <form action="/Store/Search" method="post">
+                    <input class="searcharea" type="text" name="see"/>
+                    <input class="buttonsearch" type="submit" value="Поиск" />
+               </form>
+               </div>
+            </li>
+         </ul>
+     </div>
+     <div class="headerPic">
+        <div class="headerDescription"></div>
+        <div class="headerDetails"></div>
+     </div>
+</div>
+<!-- end #header -->
+<!-- begin #sidebar1 -->
+      <div id="sidebar1">
+        <h2>Категории</h2>
+         <ul>
+         <li>@Html.ActionLink("Все товары", "Index", "Store")</li>
+         </ul>
+             @{Html.RenderAction("CategMenu", "Store");}
+      </div>
+<!-- end #sidebar1 -->
+<!-- begin #mainContent -->
+    <div id="mainContent">         
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>         
+    </div>
+<!-- end #mainContent -->
+        <br class="clearfloat" />
+</div>
+<!-- end #container -->
+<!-- begin #footer -->
+    <div id="footer">
+        <div class="footerBody">
+            <div class="copyright">
+                Vladimirova Victoria<br>
+                Copyright &copy; @DateTime.Now.Year  Handmade Store.
+            </div>
+        </div>
+    </div>
+ <!-- end #footer -->
+    @RenderSection("scripts", required: false)  
+</body>
+</html>

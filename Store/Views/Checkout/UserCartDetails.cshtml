@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Store.Models.OrderDetail>
+@{
+    ViewBag.Title = "Подробнее";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    int idparam = ViewBag.param;
+    int sum = 0;
+    string s = "";
+}
+
+@foreach(var t in Model)
+{
+    if(t.OrderId == idparam)
+    {
+        <h4>Подробная информация о заказе № @idparam. <span>(Дата оформления @Html.DisplayFor(modelItem => t.Order.OrderDate))</span></h4>
+        break;
+    }
+}
+
+<div class="UserTab">
+    <table>
+        <tr>
+            <td>Название товара </td>
+            <td>Количество </td>
+            <td>Цена </td>
+        </tr>
+@foreach(var item in Model)
+{
+    if (item.OrderId == idparam)
+    { 
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Tovar.Title)</td>
+            <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+            <td>@Html.DisplayFor(modelItem => item.UnitPrice)</td>
+        </tr>
+        s = item.Order.Username;        
+        sum = sum + item.Quantity * item.UnitPrice; 
+    }
+}
+<tr><td class="total">Общая стоимость: </td><td></td><td class="total"> @sum руб.</td></tr>
+</table><br />
+@foreach(var item in Model)
+{
+    if (item.OrderId == idparam)
+    { 
+         <p>Получатель: @Html.DisplayFor(modelItem => item.Order.FirstName) @Html.DisplayFor(modelItem => item.Order.LastName)</p>
+         <p>Адрес: 
+             @Html.DisplayFor(modelItem => item.Order.Country), 
+             @Html.DisplayFor(modelItem => item.Order.State) р-он, 
+             г.@Html.DisplayFor(modelItem => item.Order.City), 
+             @Html.DisplayFor(modelItem => item.Order.Address), 
+             почтовый индекс:@Html.DisplayFor(modelItem => item.Order.PostalCode).
+         </p>
+            <p>Телефон:  @Html.DisplayFor(modelItem => item.Order.Phone)</p>
+        break;
+    } 
+}
+<br />
+    @Html.ActionLink("Назад", "UserCart","Checkout", new { nameparam = s }, "")
+</div>
+

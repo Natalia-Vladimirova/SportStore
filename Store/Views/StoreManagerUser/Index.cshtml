@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Store.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "Admin-пользователи";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
+    List<string> temp=new List<string>();
+    int c = 0;
+}
+@foreach (var item in Model)
+{
+    c = 0;
+    foreach (string ttt in temp)
+    {
+        if (ttt == item.Order.Username)
+        { c = 1; }
+    }
+    if (c ==0 )
+    {temp.Add(item.Order.Username);}
+}
+
+<h2>Список заказов пользователей: </h2>
+<table>
+ @foreach (string ttt in temp)
+ {
+      <tr>
+            <td>        
+            @Html.ActionLink(ttt, "UserCart", "StoreManagerUser", new { nameparam = ttt }, "")
+            </td>
+        </tr>
+        <tr><td>---------------------------------</td></tr>
+ }
+</table>

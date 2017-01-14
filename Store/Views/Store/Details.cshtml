@@ -1,0 +1,23 @@
+﻿@model Store.Models.Tovar
+@{
+    ViewBag.Title = "Подробнее";
+ }
+
+<div class="shopId">
+    <div><img src="@Url.Content(Model.Image)" /> </div>
+</div>
+<br><br>
+Название товара : @Html.DisplayFor(modelItem => Model.Title)
+<br>
+Категория : @Html.DisplayFor(modelItem => Model.Categ.Category)
+<br>
+Цена : @Html.DisplayFor(modelItem => Model.Price) руб.
+<br>
+Количество : @Html.DisplayFor(modelItem => Model.Amount)
+<br>
+Описание : @Html.DisplayFor(modelItem => Model.Description)
+<br>
+<br>
+<div class="buttondetails">@Html.ActionLink("buy!", "AddToCart","ShoppingCart", new { id = Model.TovarId }, "")</div>
+
+

@@ -1,0 +1,18 @@
+﻿@model Store.Models.Tovar
+
+@{
+    ViewBag.Title = "Admin-товар";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Удаление</h2>
+<p>Вы действительно хотите удалить товар <strong>"@Model.Title"</strong> ?</p>
+<br />
+@using (Html.BeginForm()) {
+    <p>
+        <input class="buttonsubmit" type="submit" value="Удалить" />
+    </p>
+<br />
+   <p>
+       <a href="javascript:history.go(-1)">Назад</a>
+    </p>
+}

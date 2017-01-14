@@ -1,0 +1,36 @@
+﻿@model Store.Models.Categ
+
+@{
+    ViewBag.Title = "Admin-категория";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Редактирование категории:</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Categ</legend>
+
+        @Html.HiddenFor(model => model.CategId)
+
+        <div class="editor-label">
+           Категория
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Category)
+            @Html.ValidationMessageFor(model => model.Category)
+        </div>
+        <br>
+        <p>
+            <input class="buttonsubmit" type="submit" value="Сохранить" />
+        </p>
+        <br>
+        <div>
+            <a href="javascript:history.go(-1)">Назад</a>
+        </div>
+    </fieldset>
+}

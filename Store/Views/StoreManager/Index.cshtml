@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Store.Models.Tovar>
+
+@helper Truncate(string input, int length)
+ {
+    if (input.Length <= length) {
+        @input
+    } else {
+        @input.Substring(0, length)<text>...</text>
+    }
+} 
+
+@{
+    ViewBag.Title = "Admin-товары";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<br>
+<p>
+    @Html.ActionLink("Создать новый товар", "Create")
+</p>
+<br>
+<div class="adminTab">
+    <table>
+        <tr>
+            <th>Картинка</th>
+            <th>Название</th>
+            <th>Количество</th>
+            <th>Цена</th>
+            <th>Описание</th>
+            <th></th>
+        </tr>
+
+@foreach (var item in Model)
+        {
+            <tr>
+                @Html.HiddenFor(modelItem => item.TovarId)
+                <td>
+                    <div class="adminImg"><img src="@Url.Content(item.Image)" /> </div>
+                </td>
+                <td>
+                    @Truncate(item.Title, 20)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Truncate(item.Description, 20)
+               </td>
+            <td>
+                @Html.ActionLink("Изменить", "Edit", new { id=item.TovarId }) |
+                @Html.ActionLink("Подробнее", "Details", new { id=item.TovarId }) |
+                @Html.ActionLink("Удалить", "Delete", new { id=item.TovarId })
+            </td>
+         </tr>
+}
+
+</table>
+</div>

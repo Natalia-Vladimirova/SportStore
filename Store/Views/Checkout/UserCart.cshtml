@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Store.Models.OrderDetail>
+@{
+    ViewBag.Title = "Заказы";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    string nameparam = ViewBag.param;
+    int c = 0;
+}
+<h2>Заказы пользователя: @nameparam</h2>
+<table>
+@foreach(var item in Model)
+{
+    int i = String.Compare(item.Order.Username,nameparam,false);
+    if (i==0)
+    {
+        if (c != item.Order.OrderId){
+        <tr>
+            <td>Заказ № @Html.DisplayFor(modelItem => item.Order.OrderId)        
+            @Html.ActionLink("Подробнее", "UserCartDetails","Checkout", new { idparam = item.Order.OrderId }, "")
+            </td>
+        </tr>
+        <tr><td>---------------------------------</td></tr>
+        c = item.Order.OrderId;
+        }                                 
+    }
+}
+    </table>

@@ -1,0 +1,21 @@
+﻿@model Store.Models.Categ
+
+@{
+    ViewBag.Title = "Admin-категория";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Подробная информация:</h2>
+
+<fieldset>
+    <legend>Categ</legend>
+
+    <div class="display-label">Категория:</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Category)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Изменить", "Edit", new { id=Model.CategId }) |
+    @Html.ActionLink("Вернуться обратно", "Index")
+</p>

@@ -1,0 +1,18 @@
+﻿@model Store.Models.Categ
+
+@{
+    ViewBag.Title = "Admin-категория";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Удаление:</h2>
+<p>Вы действительно хотите удалить категорию <strong>"@Model.Category"</strong> ?</p>
+<br />
+@using (Html.BeginForm()) {
+    <p>
+        <input class="buttonsubmit" type="submit" value="Удалить" />
+    </p>
+<br />    
+    <p >
+        @Html.ActionLink("Вернуться обратно", "Index")
+    </p>
+}
