@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DAL;
+using Store.Mappers;
 using Store.Models;
 
 namespace Store.Controllers
@@ -12,7 +14,7 @@ namespace Store.Controllers
     [Authorize(Roles = "Administrator")]
     public class StoreManagerController : Controller
     {
-        private StoreDBContext db = new StoreDBContext();
+        private StoreDbContext db = new StoreDbContext();
 
         //
         // GET: /StoreManager/
@@ -20,7 +22,7 @@ namespace Store.Controllers
         public ViewResult Index()
         {
             var tovars = db.Tovars.Include(t => t.Categ);
-            return View(tovars.ToList());
+            return View(tovars.ToList().Select(i => i.ToMvc()));
         }
 
         //
@@ -28,7 +30,7 @@ namespace Store.Controllers
 
         public ViewResult Details(int id)
         {
-            Tovar tovar = db.Tovars.Find(id);
+            Tovar tovar = db.Tovars.Find(id).ToMvc();
             return View(tovar);
         }
 
@@ -49,7 +51,7 @@ namespace Store.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Tovars.Add(tovar);
+                db.Tovars.Add(tovar.ToDal());
                 db.SaveChanges();
                 return RedirectToAction("Index");  
             }
@@ -63,7 +65,7 @@ namespace Store.Controllers
  
         public ActionResult Edit(int id)
         {
-            Tovar tovar = db.Tovars.Find(id);
+            Tovar tovar = db.Tovars.Find(id).ToMvc();
             ViewBag.CategId = new SelectList(db.Categs, "CategId", "Category", tovar.CategId);
             return View(tovar);
         }
@@ -89,7 +91,7 @@ namespace Store.Controllers
  
         public ActionResult Delete(int id)
         {
-            Tovar tovar = db.Tovars.Find(id);
+            Tovar tovar = db.Tovars.Find(id).ToMvc();
             return View(tovar);
         }
 
@@ -99,8 +101,8 @@ namespace Store.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {            
-            Tovar tovar = db.Tovars.Find(id);
-            db.Tovars.Remove(tovar);
+            Tovar tovar = db.Tovars.Find(id).ToMvc();
+            db.Tovars.Remove(tovar.ToDal());
             db.SaveChanges();
             return RedirectToAction("Index");
         }

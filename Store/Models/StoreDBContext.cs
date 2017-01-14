@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Store.Models
 {
-    public class StoreDBContext : DbContext
+    public class StoreDBContext1 : DbContext
     {
         public DbSet<Tovar> Tovars { get; set; }
         public DbSet<Categ> Categs { get; set; }

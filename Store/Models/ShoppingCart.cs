@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DAL;
+using Store.Mappers;
 
 namespace Store.Models
 {
     public partial class ShoppingCart
     {
-        StoreDBContext storeDB = new StoreDBContext();
+        StoreDbContext storeDB = new StoreDbContext();
         string ShoppingCartId { get; set; }
         public const string CartSessionKey = "CartId";
         public static ShoppingCart GetCart(HttpContextBase context)
@@ -31,7 +33,7 @@ namespace Store.Models
             if (cartItem == null)
             {
                 // Create a new cart item if no cart item exists
-                cartItem = new Cart
+                cartItem = new DAL.Interfaces.Entities.Cart
                 {
                     TovarId = tovar.TovarId,
                     CartId = ShoppingCartId,
@@ -89,7 +91,7 @@ namespace Store.Models
         public List<Cart> GetCartItems()
         {
             return storeDB.Carts.Where(
-                cart => cart.CartId == ShoppingCartId).ToList();
+                cart => cart.CartId == ShoppingCartId).Select(i => i.ToMvc()).ToList();
         }
         public int GetCount()
         {
@@ -128,7 +130,7 @@ namespace Store.Models
                 // Set the order total of the shopping cart
                 orderTotal += (item.Count * item.Tovar.Price);
 
-                storeDB.OrderDetails.Add(orderDetail);
+                storeDB.OrderDetails.Add(orderDetail.ToDal());
 
             }
             // Set the order's total to the orderTotal count
@@ -164,7 +166,7 @@ namespace Store.Models
         // be associated with their username
         public void MigrateCart(string userName)
         {
-            var shoppingCart = storeDB.Carts.Where(c => c.CartId == ShoppingCartId);
+            var shoppingCart = storeDB.Carts.Where(c => c.CartId == ShoppingCartId).ToList().Select(i => i.ToMvc());
 
             foreach (Cart item in shoppingCart)
             {

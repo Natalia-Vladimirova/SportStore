@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace DAL.Interfaces.Entities
 {
@@ -13,7 +14,7 @@ namespace DAL.Interfaces.Entities
 
         public int Count { get; set; }
 
-        public System.DateTime DateCreated { get; set; }
+        public DateTime DateCreated { get; set; }
 
         public virtual Tovar Tovar { get; set; }
     }

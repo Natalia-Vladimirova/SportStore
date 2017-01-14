@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DAL;
+using Store.Mappers;
 using Store.Models;
 
 namespace Store.Controllers
@@ -12,14 +14,14 @@ namespace Store.Controllers
     [Authorize(Roles = "Administrator")]
     public class StoreManagerCatController : Controller
     {
-        private StoreDBContext db = new StoreDBContext();
+        private StoreDbContext db = new StoreDbContext();
 
         //
         // GET: /StoreManagerCat/
 
         public ViewResult Index()
         {
-            return View(db.Categs.ToList());
+            return View(db.Categs.ToList().Select(i => i.ToMvc()));
         }
 
         //
@@ -27,7 +29,7 @@ namespace Store.Controllers
 
         public ViewResult Details(int id)
         {
-            Categ categ = db.Categs.Find(id);
+            Categ categ = db.Categs.Find(id).ToMvc();
             return View(categ);
         }
 
@@ -47,7 +49,7 @@ namespace Store.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Categs.Add(categ);
+                db.Categs.Add(categ.ToDal());
                 db.SaveChanges();
                 return RedirectToAction("Index");  
             }
@@ -60,7 +62,7 @@ namespace Store.Controllers
  
         public ActionResult Edit(int id)
         {
-            Categ categ = db.Categs.Find(id);
+            Categ categ = db.Categs.Find(id).ToMvc();
             return View(categ);
         }
 
@@ -84,7 +86,7 @@ namespace Store.Controllers
  
         public ActionResult Delete(int id)
         {
-            Categ categ = db.Categs.Find(id);
+            Categ categ = db.Categs.Find(id).ToMvc();
             return View(categ);
         }
 
@@ -94,8 +96,8 @@ namespace Store.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {            
-            Categ categ = db.Categs.Find(id);
-            db.Categs.Remove(categ);
+            Categ categ = db.Categs.Find(id).ToMvc();
+            db.Categs.Remove(categ.ToDal());
             db.SaveChanges();
             return RedirectToAction("Index");
         }

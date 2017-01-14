@@ -113,6 +113,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CartHelper.cs" />
+    <Compile Include="Mappers\CartMappers.cs" />
+    <Compile Include="Mappers\CategMappers.cs" />
+    <Compile Include="Mappers\OrderDetailMappers.cs" />
+    <Compile Include="Mappers\OrderMappers.cs" />
+    <Compile Include="Mappers\TovarMappers.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Categ.cs" />
@@ -257,6 +263,10 @@
     <ProjectReference Include="..\DAL.Interfaces\DAL.Interfaces.csproj">
       <Project>{dba76662-9a04-49b1-9d95-75384659add3}</Project>
       <Name>DAL.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{792a60a4-4846-41ff-ae43-b9f7fa132ef5}</Project>
+      <Name>DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

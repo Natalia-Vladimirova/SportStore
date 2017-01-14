@@ -5,6 +5,8 @@ namespace DAL
 {
     public class StoreDbContext : DbContext
     {
+        //public StoreDbContext() /*: base("StoreDBConnection")*/ { }
+
         public DbSet<Tovar> Tovars { get; set; }
 
         public DbSet<Categ> Categs { get; set; }

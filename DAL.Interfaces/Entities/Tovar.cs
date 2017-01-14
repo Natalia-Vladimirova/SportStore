@@ -10,8 +10,11 @@ namespace DAL.Interfaces.Entities
         [StringLength(160)]
         public string Title { get; set; }
 
+        [Required]
+        [Range(1, 500000)]
         public int Price { get; set; }
 
+        [Range(1, 1000)]
         public int Amount { get; set; }
 
         [StringLength(200)]

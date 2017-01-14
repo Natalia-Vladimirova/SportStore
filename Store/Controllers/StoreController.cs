@@ -1,30 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Store.Models;
 using System.Xml;
+using DAL;
+using Store.Mappers;
 
 namespace Store.Controllers
 {
     public class StoreController : Controller
     {
-        StoreDBContext storeDB = new StoreDBContext();
+        StoreDbContext storeDB = new StoreDbContext();
         static List<int> compare = new List<int>();
         //
         // GET: /Store/
         public ActionResult Index()
         {
             ViewBag.listCompare = compare;
-            return View(storeDB.Tovars.ToList());
+            return View(storeDB.Tovars.ToList().Select(i => i.ToMvc()));
         }
 
         // Поиск
         public ActionResult Search(string see)
         {
             ViewBag.param = see;
-            return View(storeDB.Tovars.ToList());
+            return View(storeDB.Tovars.ToList().Select(i => i.ToMvc()));
         }
 
         // Добавить товар в сравнение
@@ -51,13 +54,13 @@ namespace Store.Controllers
         public ActionResult ShowCompare()
         {
             ViewBag.listCompare = compare;
-            return View(storeDB.Tovars.ToList());
+            return View(storeDB.Tovars.ToList().Select(i => i.ToMvc()));
         }
 
         public ActionResult Browse(int param)
         {
             ViewBag.param = param;
-            return View(storeDB.Tovars.ToList());
+            return View(storeDB.Tovars.ToList().Select(i => i.ToMvc()));
         }
 
         //
@@ -65,14 +68,14 @@ namespace Store.Controllers
         public ActionResult BrowseOld(string categ)
         {
             var categModel = storeDB.Categs.Include("Tovars").Single(g => g.Category == categ);
-            return View(categModel);
+            return View(categModel.ToMvc());
         }
         //
         // GET: /Store/Details
         public ActionResult Details(int id)
         {
             var tovar = storeDB.Tovars.Find(id);
-            return View(tovar);
+            return View(tovar.ToMvc());
         }
         //
         // GET: /Store/CategMenu
@@ -80,7 +83,7 @@ namespace Store.Controllers
         public ActionResult CategMenu()
         {
             var categs = storeDB.Categs.ToList();
-            return PartialView(categs);
+            return PartialView(categs.Select(i => i.ToMvc()));
         }
 
         public ActionResult Myxml()

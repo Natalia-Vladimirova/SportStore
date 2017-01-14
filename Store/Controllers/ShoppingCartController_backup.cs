@@ -1,89 +1,78 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using DAL;
-using DAL.Interfaces.Repositories;
-using DAL.Repositories;
+using Store.Models;
 using Store.ViewModels;
-using Store.Helpers;
-using Store.Mappers;
 
 namespace Store.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private readonly ICartRepository cartRepository = new CartRepository(new StoreDbContext());
-        private readonly IProductRepository productRepository = new ProductRepository(new StoreDbContext());
-
-        //StoreDBContext storeDB = new StoreDBContext();
-
+        StoreDBContext storeDB = new StoreDBContext();
         //
         // GET: /ShoppingCart/
         public ActionResult Index()
         {
-            //var cart = ShoppingCart.GetCart(this.HttpContext);
-            string cartId = CartHelper.GetCartId(this.HttpContext);
+            var cart = ShoppingCart.GetCart(this.HttpContext);
 
             // Set up our ViewModel
             var viewModel = new ShoppingCartViewModel
             {
-                CartItems = cartRepository.GetCartItems(cartId).Select(i => i.ToMvc()).ToList(),//cart.GetCartItems(),
-                CartTotal = cartRepository.GetTotal(cartId)//cart.GetTotal()
+                CartItems = cart.GetCartItems(),
+                CartTotal = cart.GetTotal()
             };
-
+            // Return the view
             return View(viewModel);
         }
-
         //
         // GET: /Store/AddToCart/5
         public ActionResult AddToCart(int id)
         {
             // Retrieve the album from the database
-            var product = productRepository.GetById(id);
+            var addedAlbum = storeDB.Tovars.Single(tovar => tovar.TovarId == id);
 
             // Add it to the shopping cart
-            string cartId = CartHelper.GetCartId(this.HttpContext);
+            var cart = ShoppingCart.GetCart(this.HttpContext);
 
-            cartRepository.AddToCart(product, cartId);
+            cart.AddToCart(addedAlbum);
 
             // Go back to the main store page for more shopping
             return RedirectToAction("Index");
         }
-
         //
         // AJAX: /ShoppingCart/RemoveFromCart/5
         [HttpPost]
         public ActionResult RemoveFromCart(int id)
         {
             // Remove the item from the cart
-            string cartId = CartHelper.GetCartId(this.HttpContext);
+            var cart = ShoppingCart.GetCart(this.HttpContext);
 
             // Get the name of the album to display confirmation
-            string tovarName = cartRepository.GetById(id).Tovar.Title;
+            string tovarName = storeDB.Carts
+                .Single(item => item.RecordId == id).Tovar.Title;
 
             // Remove from cart
-            int itemCount = cartRepository.RemoveFromCart(id, cartId);
+            int itemCount = cart.RemoveFromCart(id);
 
             // Display the confirmation message
             var results = new ShoppingCartRemoveViewModel
             {
                 Message = "Товар <<" + Server.HtmlEncode(tovarName) +
                     ">>был удален из корзины.",
-                CartTotal = cartRepository.GetTotal(cartId),
-                CartCount = cartRepository.GetCount(cartId),
+                CartTotal = cart.GetTotal(),
+                CartCount = cart.GetCount(),
                 ItemCount = itemCount,
                 DeleteId = id
             };
-
             return Json(results);
         }
-
         //
         // GET: /ShoppingCart/CartSummary
         [ChildActionOnly]
         public ActionResult CartSummary()
         {
-            string cartId = CartHelper.GetCartId(this.HttpContext);
-            ViewData["CartCount"] = cartRepository.GetCount(cartId);
+            var cart = ShoppingCart.GetCart(this.HttpContext);
+
+            ViewData["CartCount"] = cart.GetCount();
             return PartialView("CartSummary");
         }
     }

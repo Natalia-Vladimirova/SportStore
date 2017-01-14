@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using DAL;
+using Store.Mappers;
 using Store.Models;
 
 namespace Store.Controllers
@@ -8,7 +10,7 @@ namespace Store.Controllers
     [Authorize]
     public class CheckoutController : Controller
     {
-        StoreDBContext storeDB = new StoreDBContext();
+        StoreDbContext storeDB = new StoreDbContext();
         const string PromoCode = "FREE";
         //
         // GET: /Checkout/AddressAndPayment
@@ -37,7 +39,7 @@ namespace Store.Controllers
                     order.OrderDate = DateTime.Now;
 
                     //Save Order
-                    storeDB.Orders.Add(order);
+                    storeDB.Orders.Add(order.ToDal());
                     storeDB.SaveChanges();
                     //Process the order
                     var cart = ShoppingCart.GetCart(this.HttpContext);
@@ -73,13 +75,13 @@ namespace Store.Controllers
         public ActionResult UserCart(string nameparam)
         {
             ViewBag.param = nameparam;
-            return View(storeDB.OrderDetails.ToList());
+            return View(storeDB.OrderDetails.ToList().Select(i => i.ToMvc()));
         }
 
         public ActionResult UserCartDetails(int idparam)
         {
             ViewBag.param = idparam;
-            return View(storeDB.OrderDetails.ToList());
+            return View(storeDB.OrderDetails.ToList().Select(i => i.ToMvc()));
         }
     }
 }

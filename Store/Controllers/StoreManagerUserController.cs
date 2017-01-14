@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DAL;
+using Store.Mappers;
 using Store.Models;
 
 namespace Store.Controllers
@@ -10,25 +12,25 @@ namespace Store.Controllers
     [Authorize(Roles = "Administrator")]
     public class StoreManagerUserController : Controller
     {
-        StoreDBContext storeDB = new StoreDBContext();
+        StoreDbContext storeDB = new StoreDbContext();
         //
         // GET: /StoreManagerUser/
 
         public ActionResult Index()
         {
-            return View(storeDB.OrderDetails.ToList());
+            return View(storeDB.OrderDetails.ToList().Select(i => i.ToMvc()));
         }
 
         public ActionResult UserCart(string nameparam)
         {
             ViewBag.param = nameparam;
-            return View(storeDB.OrderDetails.ToList());
+            return View(storeDB.OrderDetails.ToList().Select(i => i.ToMvc()));
         }
 
         public ActionResult UserCartDetails(int idparam)
         {
             ViewBag.param = idparam;
-            return View(storeDB.OrderDetails.ToList());
+            return View(storeDB.OrderDetails.ToList().Select(i => i.ToMvc()));
         }
 
         //
@@ -36,7 +38,7 @@ namespace Store.Controllers
 
         public ActionResult Delete(int id)
         {
-            Order order = storeDB.Orders.Find(id);
+            Order order = storeDB.Orders.Find(id).ToMvc();
             return View(order);
         }
 
@@ -46,8 +48,8 @@ namespace Store.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Order order = storeDB.Orders.Find(id);
-            storeDB.Orders.Remove(order);
+            Order order = storeDB.Orders.Find(id).ToMvc();
+            storeDB.Orders.Remove(order.ToDal());
             storeDB.SaveChanges();
             return RedirectToAction("Index");
         }
