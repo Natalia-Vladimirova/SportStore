@@ -15,7 +15,7 @@ namespace DAL.Interfaces.Repositories
 
         void EmptyCart(string shoppingCartId);
 
-        List<Cart> GetCartItems(string shoppingCartId);
+        IEnumerable<Cart> GetCartItems(string shoppingCartId);
 
         int GetCount(string shoppingCartId);
 

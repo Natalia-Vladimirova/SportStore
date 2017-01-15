@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Store.Controllers
 {
@@ -11,7 +7,6 @@ namespace Store.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "Добро пожаловать в Handmade Store!";
-
             return View();
         }
 

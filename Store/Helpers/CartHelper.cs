@@ -5,7 +5,7 @@ namespace Store.Helpers
 {
     public class CartHelper
     {
-        public const string CartSessionKey = "CartId";
+        private const string CartSessionKey = "CartId";
 
         /*public static ShoppingCart GetCart(HttpContextBase context)
         {

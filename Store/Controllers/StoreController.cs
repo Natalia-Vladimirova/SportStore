@@ -1,94 +1,80 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Store.Models;
 using System.Xml;
 using DAL;
+using DAL.Interfaces.Repositories;
+using DAL.Repositories;
 using Store.Mappers;
 
 namespace Store.Controllers
 {
     public class StoreController : Controller
     {
-        StoreDbContext storeDB = new StoreDbContext();
-        static List<int> compare = new List<int>();
-        //
-        // GET: /Store/
+        private static List<int> compare = new List<int>();
+
+        private readonly IProductRepository productRepository = new ProductRepository(new StoreDbContext());
+        private readonly ICategoryRepository categoryRepository = new CategoryRepository(new StoreDbContext());
+
         public ActionResult Index()
         {
             ViewBag.listCompare = compare;
-            return View(storeDB.Tovars.ToList().Select(i => i.ToMvc()));
+            return View(productRepository.GetAll().Select(i => i.ToMvc()));
         }
 
-        // Поиск
         public ActionResult Search(string see)
         {
             ViewBag.param = see;
-            return View(storeDB.Tovars.ToList().Select(i => i.ToMvc()));
+            return View(productRepository.GetAll().Select(i => i.ToMvc()));
         }
 
-        // Добавить товар в сравнение
         public ActionResult AddCompare(int id)
         {
             compare.Add(id);
             return Redirect("Index");
         }
 
-        // Удалить товар из сравнения
         public ActionResult DeleteCompare(int id)
         {
             compare.Remove(id);
             return Redirect("ShowCompare");
         }
 
-        // Удалить все товары из сравнения
         public ActionResult DeleteAllCompare()
         {
             compare.Clear();
             return Redirect("ShowCompare");
         }
-        // Сравнить товары
+
         public ActionResult ShowCompare()
         {
             ViewBag.listCompare = compare;
-            return View(storeDB.Tovars.ToList().Select(i => i.ToMvc()));
+            return View(productRepository.GetAll().Select(i => i.ToMvc()));
         }
 
         public ActionResult Browse(int param)
         {
             ViewBag.param = param;
-            return View(storeDB.Tovars.ToList().Select(i => i.ToMvc()));
+            return View(productRepository.GetAll().Select(i => i.ToMvc()));
         }
 
-        //
-        // GET: /Store/Browse
-        public ActionResult BrowseOld(string categ)
-        {
-            var categModel = storeDB.Categs.Include("Tovars").Single(g => g.Category == categ);
-            return View(categModel.ToMvc());
-        }
-        //
-        // GET: /Store/Details
         public ActionResult Details(int id)
         {
-            var tovar = storeDB.Tovars.Find(id);
-            return View(tovar.ToMvc());
+            var product = productRepository.GetById(id);
+            return View(product.ToMvc());
         }
-        //
-        // GET: /Store/CategMenu
+
         [ChildActionOnly]
         public ActionResult CategMenu()
         {
-            var categs = storeDB.Categs.ToList();
-            return PartialView(categs.Select(i => i.ToMvc()));
+            var categories = categoryRepository.GetAll();
+            return PartialView(categories.Select(i => i.ToMvc()));
         }
 
         public ActionResult Myxml()
         {
-            var cat = storeDB.Categs.ToList();
+            var cat = categoryRepository.GetAll();
 
             XmlTextWriter textWriter = new XmlTextWriter("C:\\Предметы\\_STORE_\\Store\\myxml.xml", null);
             textWriter.WriteStartDocument();

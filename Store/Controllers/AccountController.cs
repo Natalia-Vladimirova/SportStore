@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 using System.Web.Security;
 using Store.Models;
 
@@ -11,17 +7,8 @@ namespace Store.Controllers
 {
     public class AccountController : Controller
     {
-        private void MigrateShoppingCart(string UserName)
-        {
-            // Associate shopping cart items with logged-in user
-            var cart = ShoppingCart.GetCart(this.HttpContext);
-
-            cart.MigrateCart(UserName);
-            Session[ShoppingCart.CartSessionKey] = UserName;
-        }
         //
         // GET: /Account/LogOn
-
         public ActionResult LogOn()
         {
             return View();
@@ -29,7 +16,6 @@ namespace Store.Controllers
 
         //
         // POST: /Account/LogOn
-
         [HttpPost]
         public ActionResult LogOn(LogOnModel model, string returnUrl)
         {
@@ -45,15 +31,11 @@ namespace Store.Controllers
                     {
                         return Redirect(returnUrl);
                     }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
+
+                    return RedirectToAction("Index", "Home");
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Имя пользователя или пароль указаны неверно.");
-                }
+
+                ModelState.AddModelError("", "Имя пользователя или пароль указаны неверно.");
             }
 
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
@@ -62,7 +44,6 @@ namespace Store.Controllers
 
         //
         // GET: /Account/LogOff
-
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
@@ -72,7 +53,6 @@ namespace Store.Controllers
 
         //
         // GET: /Account/Register
-
         public ActionResult Register()
         {
             return View();
@@ -80,7 +60,6 @@ namespace Store.Controllers
 
         //
         // POST: /Account/Register
-
         [HttpPost]
         public ActionResult Register(RegisterModel model)
         {
@@ -92,13 +71,11 @@ namespace Store.Controllers
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
+                    FormsAuthentication.SetAuthCookie(model.UserName, false);
                     return RedirectToAction("Index", "Home");
                 }
-                else
-                {
-                    ModelState.AddModelError("", ErrorCodeToString(createStatus));
-                }
+
+                ModelState.AddModelError("", ErrorCodeToString(createStatus));
             }
 
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
@@ -107,7 +84,6 @@ namespace Store.Controllers
 
         //
         // GET: /Account/ChangePassword
-
         [Authorize]
         public ActionResult ChangePassword()
         {
@@ -116,20 +92,16 @@ namespace Store.Controllers
 
         //
         // POST: /Account/ChangePassword
-
         [Authorize]
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordModel model)
         {
             if (ModelState.IsValid)
             {
-
-                // При некоторых сценариях сбоя операция смены пароля ChangePassword вызывает исключение,
-                // а не возвращает значение false (ложь).
                 bool changePasswordSucceeded;
                 try
                 {
-                    MembershipUser currentUser = Membership.GetUser(User.Identity.Name, true /* userIsOnline */);
+                    MembershipUser currentUser = Membership.GetUser(User.Identity.Name, true);
                     changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
                 }
                 catch (Exception)
@@ -141,10 +113,8 @@ namespace Store.Controllers
                 {
                     return RedirectToAction("ChangePasswordSuccess");
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Неправильный текущий пароль или недопустимый новый пароль.");
-                }
+
+                ModelState.AddModelError("", "Неправильный текущий пароль или недопустимый новый пароль.");
             }
 
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
@@ -153,7 +123,6 @@ namespace Store.Controllers
 
         //
         // GET: /Account/ChangePasswordSuccess
-
         public ActionResult ChangePasswordSuccess()
         {
             return View();
@@ -162,8 +131,6 @@ namespace Store.Controllers
         #region Status Codes
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
-            // Полный список кодов состояния см. по адресу http://go.microsoft.com/fwlink/?LinkID=177550
-            //.
             switch (createStatus)
             {
                 case MembershipCreateStatus.DuplicateUserName:

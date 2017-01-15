@@ -11,6 +11,6 @@ namespace DAL.Interfaces.Entities
         [StringLength(200)]
         public string Category { get; set; }
 
-        public List<Tovar> Tovars { get; set; }
+        public virtual List<Tovar> Tovars { get; set; }
     }
 }

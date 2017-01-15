@@ -2,6 +2,9 @@
 using System.Linq;
 using System.Web.Mvc;
 using DAL;
+using DAL.Interfaces.Repositories;
+using DAL.Repositories;
+using Store.Helpers;
 using Store.Mappers;
 using Store.Models;
 
@@ -10,16 +13,17 @@ namespace Store.Controllers
     [Authorize]
     public class CheckoutController : Controller
     {
-        StoreDbContext storeDB = new StoreDbContext();
-        const string PromoCode = "FREE";
-        //
-        // GET: /Checkout/AddressAndPayment
+        private readonly ICartRepository cartRepository = new CartRepository(new StoreDbContext());
+        private readonly IOrderRepository orderRepository = new OrderRepository(new StoreDbContext());
+        private readonly IOrderDetailRepository orderDetailRepository = new OrderDetailRepository(new StoreDbContext());
+
+        private const string PromoCode = "FREE";
+
         public ActionResult AddressAndPayment()
         {
             return View();
         }
-        //
-        // POST: /Checkout/AddressAndPayment
+
         [HttpPost]
         public ActionResult AddressAndPayment(FormCollection values)
         {
@@ -29,24 +33,21 @@ namespace Store.Controllers
             try
             {
                 if (string.Equals(values["PromoCode"], PromoCode,
-                    StringComparison.OrdinalIgnoreCase) == false)
+                        StringComparison.OrdinalIgnoreCase) == false)
                 {
                     return View(order);
                 }
-                else
-                {
-                    order.Username = User.Identity.Name;
-                    order.OrderDate = DateTime.Now;
 
-                    //Save Order
-                    storeDB.Orders.Add(order.ToDal());
-                    storeDB.SaveChanges();
-                    //Process the order
-                    var cart = ShoppingCart.GetCart(this.HttpContext);
-                    cart.CreateOrder(order);
+                order.Username = User.Identity.Name;
+                order.OrderDate = DateTime.Now;
 
-                    return RedirectToAction("Complete", new { id = order.OrderId });
-                }
+                orderRepository.Create(order.ToDal());
+
+                //Process the order
+                string cartId = CartHelper.GetCartId(HttpContext);
+                cartRepository.CreateOrder(order.ToDal(), cartId);
+
+                return RedirectToAction("Complete", new {id = order.OrderId});
             }
             catch
             {
@@ -54,34 +55,26 @@ namespace Store.Controllers
                 return View(order);
             }
         }
-        //
-        // GET: /Checkout/Complete
+
         public ActionResult Complete(int id)
         {
-            // Validate customer owns this order
-            bool isValid = storeDB.Orders.Any(
-                o => o.OrderId == id &&
-                o.Username == User.Identity.Name);
-
-            if (isValid)
-            {
-                return View(id);
-            }
-            else
-            {
-                return View("Error");
-            }
+            // Validate if customer owns this order
+            bool isValid = orderRepository.OrderIsValid(id, User.Identity.Name);
+            return isValid ? View(id) : View("Error");
         }
+
         public ActionResult UserCart(string nameparam)
         {
             ViewBag.param = nameparam;
-            return View(storeDB.OrderDetails.ToList().Select(i => i.ToMvc()));
+            var orderDetails = orderDetailRepository.GetAll().Select(i => i.ToMvc());
+            return View(orderDetails);
         }
 
         public ActionResult UserCartDetails(int idparam)
         {
             ViewBag.param = idparam;
-            return View(storeDB.OrderDetails.ToList().Select(i => i.ToMvc()));
+            var orderDetails = orderDetailRepository.GetAll().Select(i => i.ToMvc());
+            return View(orderDetails);
         }
     }
 }

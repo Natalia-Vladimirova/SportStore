@@ -12,12 +12,12 @@ namespace Store.Mappers
             return new Dal.Tovar
             {
                 TovarId = item.TovarId,
-                CategId = item.CategId,
                 Title = item.Title,
                 Price = item.Price,
                 Amount = item.Amount,
                 Description = item.Description,
-                Image = item.Image
+                Image = item.Image,
+                CategId = item.CategId
             };
         }
 
@@ -28,12 +28,12 @@ namespace Store.Mappers
             return new Tovar
             {
                 TovarId = item.TovarId,
-                CategId = item.CategId,
                 Title = item.Title,
                 Price = item.Price,
                 Amount = item.Amount,
                 Description = item.Description,
                 Image = item.Image,
+                CategId = item.CategId,
                 Categ = item.Categ.ToMvc()
             };
         }

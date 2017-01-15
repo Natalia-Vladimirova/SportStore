@@ -99,7 +99,7 @@ namespace DAL.Repositories
             context.SaveChanges();
         }
 
-        public List<Cart> GetCartItems(string shoppingCartId)
+        public IEnumerable<Cart> GetCartItems(string shoppingCartId)
         {
             return context.Set<Cart>()
                 .Where(cart => cart.CartId == shoppingCartId)
@@ -141,8 +141,8 @@ namespace DAL.Repositories
             int orderTotal = 0;
 
             var cartItems = GetCartItems(shoppingCartId);
-            // Iterate over the items in the cart, 
-            // adding the order details for each
+
+            // Iterate over the items in the cart, adding the order details for each
             foreach (var item in cartItems)
             {
                 var orderDetail = new OrderDetail
@@ -152,8 +152,9 @@ namespace DAL.Repositories
                     UnitPrice = item.Tovar.Price,
                     Quantity = item.Count
                 };
+
                 // Set the order total of the shopping cart
-                orderTotal += (item.Count * item.Tovar.Price);
+                orderTotal += item.Count * item.Tovar.Price;
 
                 context.Set<OrderDetail>().Add(orderDetail);
 

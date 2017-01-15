@@ -17,12 +17,12 @@
         <div class="items">             
             <ul> 
                 <li>@Html.Partial("_LogOnPartial")</li>
-                <li> @{Html.RenderAction("CartSummary", "ShoppingCart");} </li>  
+                <li>@Html.Action("CartSummary", "ShoppingCart")</li>  
             </ul>
         </div>
     
         <div class="logo">Handmade <span>Store</span>
-            <img src="/Content/images/cart.png" />
+            <img src="/Content/cart.png" />
         </div>
     </div>
 
@@ -75,7 +75,6 @@
     <div id="footer">
         <div class="footerBody">
             <div class="copyright">
-                Vladimirova Victoria<br>
                 Copyright &copy; @DateTime.Now.Year  Handmade Store.
             </div>
         </div>
