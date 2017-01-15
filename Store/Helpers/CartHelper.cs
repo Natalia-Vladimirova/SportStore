@@ -6,20 +6,7 @@ namespace Store.Helpers
     public class CartHelper
     {
         private const string CartSessionKey = "CartId";
-
-        /*public static ShoppingCart GetCart(HttpContextBase context)
-        {
-            var cart = new ShoppingCart();
-            cart.ShoppingCartId = cart.GetCartId(context);
-            return cart;
-        }
-
-        // Helper method to simplify shopping cart calls
-        public static ShoppingCart GetCart(Controller controller)
-        {
-            return GetCart(controller.HttpContext);
-        }*/
-
+        
         public static string GetCartId(HttpContextBase context)
         {
             if (context.Session[CartSessionKey] == null)
