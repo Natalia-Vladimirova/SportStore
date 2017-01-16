@@ -129,7 +129,7 @@ img{
 	text-align:center;
 	font-size:10px;
 	font-weight:bold;
-	padding:4px 0;
+	padding:10px 0;
     padding-left:30px 0;
 }
 .shopIdHeader {
@@ -155,10 +155,16 @@ img{
     text-decoration: none;
 }
 /*--------------------------------------------Кнопка buttoncompare */
+.buttoncompare {
+    text-align: center;
+    background: #3BDA00;
+    width: 60%;
+    margin: auto;
+}
 .buttoncompare a {
     margin: 10px 0 10px 15px;
     padding: 3px 5px 3px 5px;
-    background:#3BDA00;
+    
 	border:0;
 	font-size:12px;    
 	font-weight:bold;
@@ -166,7 +172,7 @@ img{
     text-decoration: none;
 }
 
-.buttoncompareadd a {
+a.buttoncompareadd {
 	float:right;
 	background:#c3bda0;
 	cursor:pointer;
@@ -177,6 +183,11 @@ img{
 	padding:2px 4px 7px 4px;
     text-decoration: none;
 }
+
+a.buttoncompareadd:active {
+    background: #696969;
+}
+
 .buttoncomparedel a {
     margin: 10px 0 10px 10px;
     padding: 3px 5px 3px 5px;
@@ -211,8 +222,8 @@ img{
 }
 /*--------------------------------------------Кнопка buttonbuy*/
 .buttonbuy {
-	float: none;
-    margin: 5px 0 2px 0;
+	float: left;
+    margin: 4px 0 2px 0;
     
 }
 .buttonbuy a {    
@@ -402,7 +413,7 @@ img{
     height:70px;
     width: 70px;
 }
-.compareTab table{
+table.compareTab {
    border-collapse:collapse;
 }
 .compareTab td, th{

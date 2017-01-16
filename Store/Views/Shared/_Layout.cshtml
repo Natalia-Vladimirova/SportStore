@@ -4,9 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-    <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+    @*<link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />*@
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css"/>
+   
+    <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/modernizr-2.5.3.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-1.9.1.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
 </head>
 <body>
 <!--begin #container-->
@@ -21,7 +25,7 @@
             </ul>
         </div>
     
-        <div class="logo">Handmade <span>Store</span>
+        <div class="logo">Sport <span>Store</span>
             <img src="/Content/cart.png" />
         </div>
     </div>
@@ -30,18 +34,20 @@
 
     <div id="navcontainer">
         <ul id="navlist">
-           <li class="first"><a href="@Url.Content("~")" id="current">Главная</a></li>
-           <li>@Html.ActionLink("Контакты", "About", "Home")</li>
+           <li class="first"><a href="@Url.Content("~")" id="current">Main</a></li>
+           <li>@Html.ActionLink("About", "About", "Home")</li>
             <li>@Html.ActionLink("XML", "Myxml", "Store")</li>
             @if(Request.IsAuthenticated) {
-                <li><a href="@Url.Content("~/StoreManager/")">Администратор</a></li>
+                <li><a href="@Url.Content("~/StoreManager/")">Admin</a></li>
             }
-           <li><div class="search">
-               <form action="/Store/Search" method="post">
-                    <input class="searcharea" type="text" name="see"/>
-                    <input class="buttonsearch" type="submit" value="Поиск" />
-               </form>
-               </div>
+            <li>
+                <div class="search">
+                    @using (Html.BeginForm("Search", "Store", FormMethod.Post, null))
+                    { 
+                        <input class="searcharea" type="text" name="see" />
+                        <input class="buttonsearch" type="submit" value="Search" />
+                    }
+                </div>
             </li>
          </ul>
      </div>
@@ -53,9 +59,9 @@
 <!-- end #header -->
 <!-- begin #sidebar1 -->
       <div id="sidebar1">
-        <h2>Категории</h2>
+        <h2>Categories</h2>
          <ul>
-         <li>@Html.ActionLink("Все товары", "Index", "Store")</li>
+         <li>@Html.ActionLink("All products", "Index", "Store")</li>
          </ul>
              @{Html.RenderAction("CategMenu", "Store");}
       </div>
@@ -75,7 +81,7 @@
     <div id="footer">
         <div class="footerBody">
             <div class="copyright">
-                Copyright &copy; @DateTime.Now.Year  Handmade Store.
+                Copyright &copy; @DateTime.Now.Year  Sport Store.
             </div>
         </div>
     </div>

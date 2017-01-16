@@ -8,45 +8,42 @@
     }
 }
 @{
-    ViewBag.Title = "ShowCompare";
+    ViewBag.Title = "Show compare";
     Layout = "~/Views/Shared/_Layout.cshtml";
     List<int> temp = ViewBag.listCompare;
 }
 
-<h2>Сравнение выбранных товаров</h2>
+<h2>Compare</h2>
 @if (temp.Count != 0){
-<div class="buttoncomparedel">@Html.ActionLink("Удалить все товары", "DeleteAllCompare", "Store")</div>
+<div class="buttoncomparedel">@Html.ActionLink("Delete all", "DeleteAllCompare", "Store")</div>
 }
 <br />
 @if (temp.Count!=0){
     <table class="compareTab">
         <tr>
-            <th>Картинка</th>
-            <th>Название</th>
-            <th>Цена</th>
-            <th>Количество</th>
-            <th>Описание</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Count</th>
+            <th>Description</th>
             <th></th>
         </tr>
     @foreach(var item in Model){
-        foreach (int tt in temp)
-        {
-            if(item.TovarId==tt){
-            <tr>
+            <tr id="@item.TovarId">
                 <td><img src="@Url.Content(item.Image)"/></td>
                 <td>@Truncate(item.Title, 25)</td>
                 <td>@item.Price</td>
                 <td>@item.Amount</td>
                 <td>@Truncate(item.Description, 50)</td>
-                <td><a href="/Store/DeleteCompare?id=@tt">Удалить из сравнения</a></td>
+                <td>
+                    @Ajax.ActionLink("Delete", "DeleteCompare", "Store", new { id = item.TovarId }, new AjaxOptions { UpdateTargetId = item.TovarId.ToString(), InsertionMode = InsertionMode.Replace}, null)
+                </td>
             </tr>
-            }
-        }
     }
     </table>
 }
 else {
-    <p>Выберите товары!</p>
+    <p>Select products!</p>
     <br />
-    <div class="buttoncomparedel"><a href="/Store/Index/">На главную</a></div>
+    <div class="buttoncomparedel"><a href="/Store/Index/">Go to the main page</a></div>
 }

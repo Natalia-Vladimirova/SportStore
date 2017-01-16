@@ -31,26 +31,45 @@ namespace Store.Controllers
 
         public ActionResult AddCompare(int id)
         {
-            compare.Add(id);
-            return Redirect("Index");
+            if (!compare.Contains(id))
+            {
+                compare.Add(id);
+            }
+           
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_CompareProducts", compare.Count);
+            }
+            
+            return RedirectToAction("Index");
         }
 
         public ActionResult DeleteCompare(int id)
         {
             compare.Remove(id);
-            return Redirect("ShowCompare");
+            if (compare.Count == 0)
+            {
+                return JavaScript("location.reload(true)");
+            }
+
+            if (Request.IsAjaxRequest())
+            {
+                return new EmptyResult();
+            }
+
+            return RedirectToAction("ShowCompare");
         }
 
         public ActionResult DeleteAllCompare()
         {
             compare.Clear();
-            return Redirect("ShowCompare");
+            return RedirectToAction("ShowCompare");
         }
 
         public ActionResult ShowCompare()
         {
             ViewBag.listCompare = compare;
-            return View(productRepository.GetAll().Select(i => i.ToMvc()));
+            return View(productRepository.GetAll().Where(x => compare.Contains(x.TovarId)).Select(i => i.ToMvc()));
         }
 
         public ActionResult Browse(int param)

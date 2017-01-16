@@ -1,44 +1,43 @@
 ﻿@model IEnumerable<Store.Models.Tovar>
 
 @helper Truncate(string input, int length)
- {
-    if (input.Length <= length) {
+{
+    if (input.Length <= length)
+    {
         @input
-    } else {
+    }
+    else
+    {
         @input.Substring(0, length)<text>...</text>
     }
-} 
+}
 @{
     ViewBag.Title = "Главная";
     List<int> temp = ViewBag.listCompare;
-    
 }
-   
-@if (temp.Count != 0){
-   <br />
-<div class="buttoncompare">@Html.ActionLink("Сравни выбранные товары", "ShowCompare", "Store")</div>
-}
+
+<br />
+@Html.Partial("_CompareProducts", temp.Count)
+
 @foreach (var item in Model)
 {
-
-            <div class="shopId">
-                <div class="shopIdHeader">
-                    <div class="shopIdPrice">@Truncate(item.Title, 8)</div>
-                    <div class="buttoncompareadd"><a href="/Store/AddCompare?id=@item.TovarId">сравнить</a></div>
-                </div>
-                <div>
-                    <a href="@Url.Action("Details", "Store", new {id = item.TovarId})">
-                    <img src="@Url.Content(item.Image)"/></a>
-                </div>
-                <div class="shopIdTitle">
-                    Описание: @Truncate(item.Description, 20)
-                    <br>
-                    Цена: @Html.DisplayFor(modelItem => item.Price) руб.
-                    <div class="buttonbuy">@Html.ActionLink("В корзину", "AddToCart","ShoppingCart", new { id = item.TovarId }, "")</div>
-                </div>
-            </div>
-        
-    
+    <div class="shopId">
+        <div class="shopIdHeader">
+            <div class="shopIdPrice">@Truncate(item.Title, 8)</div>
+            @Ajax.ActionLink("Compare", "AddCompare", "Store", new { id = item.TovarId }, new AjaxOptions { UpdateTargetId = "compareProducts" }, new {@class = "buttoncompareadd" })
+        </div>
+        <div>
+            <a href="@Url.Action("Details", "Store", new {id = item.TovarId})">
+                <img src="@Url.Content(item.Image)" />
+            </a>
+        </div>
+        <div class="shopIdTitle">
+            Description: @Truncate(item.Description, 20)
+            <br>
+            Price: @Html.DisplayFor(modelItem => item.Price) RUB.
+            <div class="buttonbuy">@Html.ActionLink("To cart", "AddToCart", "ShoppingCart", new { id = item.TovarId }, "")</div>
+        </div>
+    </div>
 }
 
 
