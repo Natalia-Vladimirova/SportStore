@@ -25,8 +25,13 @@ namespace Store.Controllers
 
         public ActionResult Search(string see)
         {
-            ViewBag.param = see;
-            return View(productRepository.GetAll().Select(i => i.ToMvc()));
+            var model = productRepository.GetAll().Where(x => x.Title.ToUpper().Contains(see.ToUpper())).Select(i => i.ToMvc()).ToList();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_ProductList", model);
+            }
+            return View(model);
+         
         }
 
         public ActionResult AddCompare(int id)
@@ -68,14 +73,13 @@ namespace Store.Controllers
 
         public ActionResult ShowCompare()
         {
-            ViewBag.listCompare = compare;
-            return View(productRepository.GetAll().Where(x => compare.Contains(x.TovarId)).Select(i => i.ToMvc()));
+            return View(compare.Select(x => productRepository.GetById(x).ToMvc()).ToList());
+            //return View(productRepository.GetAll().Where(x => compare.Contains(x.TovarId)).Select(i => i.ToMvc()).ToList());
         }
 
         public ActionResult Browse(int param)
         {
-            ViewBag.param = param;
-            return View(productRepository.GetAll().Select(i => i.ToMvc()));
+            return View(productRepository.GetAll().Where(x => x.CategId == param).Select(i => i.ToMvc()).ToList());
         }
 
         public ActionResult Details(int id)

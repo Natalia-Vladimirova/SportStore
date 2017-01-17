@@ -1,24 +1,23 @@
 ﻿@model IEnumerable<Store.Models.Tovar>
+@{
+    ViewBag.Title = "Show compare";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 @helper Truncate(string input, int length)
- {
+{
     if (input.Length <= length) {
         @input
     } else {
         @input.Substring(0, length)<text>...</text>
     }
 }
-@{
-    ViewBag.Title = "Show compare";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    List<int> temp = ViewBag.listCompare;
-}
+
 
 <h2>Compare</h2>
-@if (temp.Count != 0){
+@if (Model.Any()){
 <div class="buttoncomparedel">@Html.ActionLink("Delete all", "DeleteAllCompare", "Store")</div>
-}
 <br />
-@if (temp.Count!=0){
+
     <table class="compareTab">
         <tr>
             <th>Image</th>

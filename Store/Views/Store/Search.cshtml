@@ -1,46 +1,8 @@
 ﻿@model IEnumerable<Store.Models.Tovar>
 
-@helper Truncate(string input, int length)
- {
-    if (input.Length <= length) {
-        @input
-    } else {
-        @input.Substring(0, length)<text>...</text>
-    }
-}
 @{
-    ViewBag.Title = "Результаты поиска";
+    ViewBag.Title = "Search results";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{
-    string see = ViewBag.param;
-
-}
-
-@foreach (var item in Model)
-{
-    Boolean b=item.Title.Contains(see);
-    if (b==true)
-    {
-    <tr>
-        <td>
-            <div class="shopId">
-                <div class="shopIdHeader">
-                    <div class="shopIdPrice">@Truncate(item.Title, 20)</div>
-                    <div class="buttonbuy">@Html.ActionLink("buy!", "AddToCart","ShoppingCart", new { id = item.TovarId }, "")</div>
-                </div>
-                <div>
-                    <a href="@Url.Action("Details", "Store", new {id = item.TovarId})">
-                    <img src="@Url.Content(item.Image)"/></a>
-                </div>
-                <div class="shopIdTitle">
-                    Описание: @Truncate(item.Description, 20)
-                    <br>
-                    Цена: @Html.DisplayFor(modelItem => item.Price) руб.
-                </div>
-            </div>
-        </td>
-    </tr>
- 
-}
-}
+    
+@Html.Partial("_ProductList", Model)

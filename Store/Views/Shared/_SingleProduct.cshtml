@@ -1,0 +1,34 @@
+﻿@model Store.Models.Tovar
+@{
+    Layout = null;
+}
+
+@helper Truncate(string input, int length)
+{
+    if (input.Length <= length)
+    {
+         @input
+    }
+    else
+    {
+         @input.Substring(0, length)<text>...</text>
+    }
+}
+
+<div class="shopId">
+    <div class="shopIdHeader">
+        <div class="shopIdPrice">@Truncate(Model.Title, 8)</div>
+        @Ajax.ActionLink("Compare", "AddCompare", "Store", new { id = Model.TovarId }, new AjaxOptions { UpdateTargetId = "compareProducts" }, new { @class = "buttoncompareadd" })
+    </div>
+    <div>
+        <a href="@Url.Action("Details", "Store", new {id = Model.TovarId})">
+            <img src="@Url.Content(Model.Image)" />
+        </a>
+    </div>
+    <div class="shopIdTitle">
+        Description: @Truncate(Model.Description, 20)
+        <br>
+        Price: @Html.DisplayFor(modelItem => Model.Price) RUB.
+        <div class="buttonbuy">@Html.ActionLink("To cart", "AddToCart", "ShoppingCart", new { id = Model.TovarId }, "")</div>
+    </div>
+</div>

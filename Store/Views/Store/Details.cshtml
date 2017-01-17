@@ -1,23 +1,23 @@
 ﻿@model Store.Models.Tovar
 @{
-    ViewBag.Title = "Подробнее";
+    ViewBag.Title = "Details";
  }
 
 <div class="shopId">
     <div><img src="@Url.Content(Model.Image)" /> </div>
 </div>
 <br><br>
-Название товара : @Html.DisplayFor(modelItem => Model.Title)
+Name : @Html.DisplayFor(modelItem => Model.Title)
 <br>
-Категория : @Html.DisplayFor(modelItem => Model.Categ.Category)
+Category : @Html.DisplayFor(modelItem => Model.Categ.Category)
 <br>
-Цена : @Html.DisplayFor(modelItem => Model.Price) руб.
+Price : @Html.DisplayFor(modelItem => Model.Price) руб.
 <br>
-Количество : @Html.DisplayFor(modelItem => Model.Amount)
+Count : @Html.DisplayFor(modelItem => Model.Amount)
 <br>
-Описание : @Html.DisplayFor(modelItem => Model.Description)
+Description : @Html.DisplayFor(modelItem => Model.Description)
 <br>
 <br>
-<div class="buttondetails">@Html.ActionLink("buy!", "AddToCart","ShoppingCart", new { id = Model.TovarId }, "")</div>
+<div class="buttondetails">@Html.ActionLink("Buy", "AddToCart","ShoppingCart", new { id = Model.TovarId }, "")</div>
 
 

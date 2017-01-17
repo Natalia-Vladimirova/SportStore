@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Store.Models.Tovar>
+
+<div id="products">
+    @foreach (var item in Model)
+    {
+        @Html.Partial("_SingleProduct", item)
+    }
+</div>

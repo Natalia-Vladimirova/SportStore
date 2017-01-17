@@ -44,7 +44,7 @@
                 <div class="search">
                     @using (Html.BeginForm("Search", "Store", FormMethod.Post, null))
                     { 
-                        <input class="searcharea" type="text" name="see" />
+                        <input class="searcharea" type="text" name="see" id="see"/>
                         <input class="buttonsearch" type="submit" value="Search" />
                     }
                 </div>
@@ -86,6 +86,20 @@
         </div>
     </div>
  <!-- end #footer -->
-    @RenderSection("scripts", required: false)  
+@RenderSection("scripts", required: false)  
+    
+    <script type="text/javascript">
+    $('#see').keyup(function() {
+        var value = $(this).val();
+       
+        $.ajax({
+            url: '@Url.Action("Search", "Store")',
+            data: { see: value },
+            success: function (dat) {
+                $('#products').html(dat);
+            }
+        });
+    })
+    </script>
 </body>
 </html>
