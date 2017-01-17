@@ -246,7 +246,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Store\Index.cshtml" />
-    <Content Include="Views\Store\BrowseOld.cshtml" />
     <Content Include="Views\Store\Details.cshtml" />
     <Content Include="Views\Store\CategMenu.cshtml" />
     <Content Include="Views\StoreManager\Index.cshtml" />
@@ -274,6 +273,8 @@
     <Content Include="Views\Store\Search.cshtml" />
     <Content Include="Views\Store\ShowCompare.cshtml" />
     <Content Include="Views\Store\_CompareProducts.cshtml" />
+    <Content Include="Views\Shared\_SingleProduct.cshtml" />
+    <Content Include="Views\Shared\_ProductList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
