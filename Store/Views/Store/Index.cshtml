@@ -8,9 +8,6 @@
 <br />
 @Html.Partial("_CompareProducts", temp.Count)
 
-@foreach (var item in Model)
-{
-    @Html.Partial("_SingleProduct", item)
-}
+@Html.Partial("_ProductList", Model)
 
 

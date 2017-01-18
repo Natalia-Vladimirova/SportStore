@@ -30,8 +30,7 @@ namespace Store.Controllers
             {
                 return PartialView("_ProductList", model);
             }
-            return View(model);
-         
+            return View(model);        
         }
 
         public ActionResult AddCompare(int id)
@@ -74,7 +73,6 @@ namespace Store.Controllers
         public ActionResult ShowCompare()
         {
             return View(compare.Select(x => productRepository.GetById(x).ToMvc()).ToList());
-            //return View(productRepository.GetAll().Where(x => compare.Contains(x.TovarId)).Select(i => i.ToMvc()).ToList());
         }
 
         public ActionResult Browse(int param)
