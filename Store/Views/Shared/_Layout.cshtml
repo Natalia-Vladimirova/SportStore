@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link rel="shortcut icon" href="@Url.Content("~/ball.ico")" type="image/x-icon">
-    @*<link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />*@
+  @*  <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />*@
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css"/>
    
     <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")" type="text/javascript"></script>
@@ -26,8 +26,8 @@
             </ul>
         </div>
     
-        <div class="logo">Sport <span>Store</span>
-            <img src="/Content/cart.png" />
+        <div class="logo">
+            <img src="@Url.Content("~/Content/cart1.png")" />
         </div>
     </div>
 
@@ -41,14 +41,14 @@
             @if(Request.IsAuthenticated) {
                 <li><a href="@Url.Content("~/StoreManager/")">Admin</a></li>
             }
-            <li>
-                <div class="search">
-                    @using (Html.BeginForm("Search", "Store", FormMethod.Post, null))
-                    { 
-                        <input class="searcharea" type="text" name="see" id="see"/>
-                        <input class="buttonsearch" type="submit" value="Search" />
-                    }
-                </div>
+            <li class="search">
+                <a>
+                @using (Html.BeginForm("Search", "Store", FormMethod.Post, null))
+                {
+                    <input class="searcharea" type="text" name="see" id="see"/>
+                    <input class="buttonsearch" type="submit" value="Search"/>
+                }
+                </a>
             </li>
          </ul>
      </div>
