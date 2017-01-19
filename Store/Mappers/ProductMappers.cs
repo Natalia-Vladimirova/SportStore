@@ -3,38 +3,38 @@ using Dal = DAL.Interfaces.Entities;
 
 namespace Store.Mappers
 {
-    public static class TovarMappers
+    public static class ProductMappers
     {
-        public static Dal.Tovar ToDal(this Tovar item)
+        public static Dal.Product ToDal(this Product item)
         {
             if (item == null) return null;
 
-            return new Dal.Tovar
+            return new Dal.Product
             {
-                TovarId = item.TovarId,
+                ProductId = item.ProductId,
                 Title = item.Title,
                 Price = item.Price,
                 Amount = item.Amount,
                 Description = item.Description,
                 Image = item.Image,
-                CategId = item.CategId
+                CategoryId = item.CategoryId
             };
         }
 
-        public static Tovar ToMvc(this Dal.Tovar item)
+        public static Product ToMvc(this Dal.Product item)
         {
             if (item == null) return null;
 
-            return new Tovar
+            return new Product
             {
-                TovarId = item.TovarId,
+                ProductId = item.ProductId,
                 Title = item.Title,
                 Price = item.Price,
                 Amount = item.Amount,
                 Description = item.Description,
                 Image = item.Image,
-                CategId = item.CategId,
-                Categ = item.Categ.ToMvc()
+                CategoryId = item.CategoryId,
+                Category = item.Category.ToMvc()
             };
         }
     }

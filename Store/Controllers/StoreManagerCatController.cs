@@ -29,15 +29,15 @@ namespace Store.Controllers
         } 
         
         [HttpPost]
-        public ActionResult Create(Categ categ)
+        public ActionResult Create(Category category)
         {
             if (ModelState.IsValid)
             {
-                categoryRepository.Create(categ.ToDal());
+                categoryRepository.Create(category.ToDal());
                 return RedirectToAction("Index");  
             }
 
-            return View(categ);
+            return View(category);
         }
         
         public ActionResult Edit(int id)
@@ -46,14 +46,14 @@ namespace Store.Controllers
         }
         
         [HttpPost]
-        public ActionResult Edit(Categ categ)
+        public ActionResult Edit(Category category)
         {
             if (ModelState.IsValid)
             {
-                categoryRepository.Update(categ.ToDal());
+                categoryRepository.Update(category.ToDal());
                 return RedirectToAction("Index");
             }
-            return View(categ);
+            return View(category);
         }
         
         public ActionResult Delete(int id)

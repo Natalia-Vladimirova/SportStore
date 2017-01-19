@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Store.Models.Tovar>
+﻿@model IEnumerable<Store.Models.Product>
 
 @helper Truncate(string input, int length)
  {
@@ -32,7 +32,7 @@
 @foreach (var item in Model)
         {
             <tr>
-                @Html.HiddenFor(modelItem => item.TovarId)
+                @Html.HiddenFor(modelItem => item.ProductId)
                 <td>
                     <div class="adminImg"><img src="@Url.Content(item.Image)" /> </div>
                 </td>
@@ -49,9 +49,9 @@
                     @Truncate(item.Description, 20)
                </td>
             <td>
-                @Html.ActionLink("Изменить", "Edit", new { id=item.TovarId }) |
-                @Html.ActionLink("Подробнее", "Details", new { id=item.TovarId }) |
-                @Html.ActionLink("Удалить", "Delete", new { id=item.TovarId })
+                @Html.ActionLink("Изменить", "Edit", new { id=item.ProductId }) |
+                @Html.ActionLink("Подробнее", "Details", new { id=item.ProductId }) |
+                @Html.ActionLink("Удалить", "Delete", new { id=item.ProductId })
             </td>
          </tr>
 }

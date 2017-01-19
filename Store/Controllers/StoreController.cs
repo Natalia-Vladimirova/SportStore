@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using System.Xml;
 using DAL;
 using DAL.Interfaces.Repositories;
 using DAL.Repositories;
@@ -77,7 +75,7 @@ namespace Store.Controllers
 
         public ActionResult Browse(int param)
         {
-            return View(productRepository.GetAll().Where(x => x.CategId == param).Select(i => i.ToMvc()).ToList());
+            return View(productRepository.GetAll().Where(x => x.CategoryId == param).Select(i => i.ToMvc()).ToList());
         }
 
         public ActionResult Details(int id)
@@ -91,35 +89,6 @@ namespace Store.Controllers
         {
             var categories = categoryRepository.GetAll();
             return PartialView(categories.Select(i => i.ToMvc()));
-        }
-
-        public ActionResult Myxml()
-        {
-            var cat = categoryRepository.GetAll();
-
-            XmlTextWriter textWriter = new XmlTextWriter("C:\\Предметы\\_STORE_\\Store\\myxml.xml", null);
-            textWriter.WriteStartDocument();
-            textWriter.WriteStartElement("Table");
-
-            foreach (var r in cat)
-            {
-
-                {
-                    textWriter.WriteStartElement("Element");
-                    textWriter.WriteStartElement("CategId", "");
-                    textWriter.WriteString(Convert.ToString(r.CategId));
-                    textWriter.WriteEndElement();
-                    textWriter.WriteStartElement("Category", "");
-                    textWriter.WriteString(Convert.ToString(r.Category));
-                    textWriter.WriteEndElement();
-                    textWriter.WriteEndElement();
-                }
-            }
-            textWriter.WriteEndElement();
-            textWriter.WriteEndDocument();
-            textWriter.Close();
-
-            return Redirect("Index");
         }
     }
 }

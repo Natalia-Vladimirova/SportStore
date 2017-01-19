@@ -8,9 +8,9 @@
 
         public int UnitPrice { get; set; }
 
-        public int TovarId { get; set; }
+        public int ProductId { get; set; }
 
-        public virtual Tovar Tovar { get; set; }
+        public virtual Product Product { get; set; }
 
         public int OrderId { get; set; }
 

@@ -2,9 +2,9 @@
 
 namespace Store.Models
 {
-    public class Tovar
+    public class Product
     {
-        public int TovarId { get; set; }
+        public int ProductId { get; set; }
 
         [Required(ErrorMessage = "Требуется название товара")]
         [StringLength(160)]
@@ -24,8 +24,8 @@ namespace Store.Models
         [StringLength(200)]
         public string Image { get; set; }
 
-        public int CategId { get; set; }
+        public int CategoryId { get; set; }
 
-        public virtual Categ Categ { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

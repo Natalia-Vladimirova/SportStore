@@ -3,13 +3,13 @@ using DAL.Interfaces.Entities;
 
 namespace DAL.Interfaces.Repositories
 {
-    public interface ICartRepository //: IRepository<Cart>
+    public interface ICartRepository
     {
         Cart GetById(int id);
 
         Cart GetCart(string shoppingCartId);
 
-        void AddToCart(Tovar tovar, string shoppingCartId);
+        void AddToCart(Product product, string shoppingCartId);
 
         int RemoveFromCart(int id, string shoppingCartId);
 

@@ -1,11 +1,11 @@
-﻿@model Store.Models.Categ
+﻿@model Store.Models.Category
 
 @{
     ViewBag.Title = "Admin-категория";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <h2>Удаление:</h2>
-<p>Вы действительно хотите удалить категорию <strong>"@Model.Category"</strong> ?</p>
+<p>Вы действительно хотите удалить категорию <strong>"@Model.CategoryName"</strong> ?</p>
 <br />
 @using (Html.BeginForm()) {
     <p>

@@ -13,7 +13,7 @@ namespace Store.Mappers
             {
                 RecordId = item.RecordId,
                 CartId = item.CartId,
-                TovarId = item.TovarId,
+                ProductId = item.ProductId,
                 Count = item.Count,
                 DateCreated = item.DateCreated
             };
@@ -27,10 +27,10 @@ namespace Store.Mappers
             {
                 RecordId = item.RecordId,
                 CartId = item.CartId,
-                TovarId = item.TovarId,
+                ProductId = item.ProductId,
                 Count = item.Count,
                 DateCreated = item.DateCreated,
-                Tovar = item.Tovar.ToMvc()
+                Product = item.Product.ToMvc()
             };
         }
     }

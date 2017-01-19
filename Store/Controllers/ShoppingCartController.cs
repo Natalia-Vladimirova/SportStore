@@ -42,14 +42,14 @@ namespace Store.Controllers
         {
             string cartId = CartHelper.GetCartId(HttpContext);
 
-            string tovarName = cartRepository.GetById(id).Tovar.Title;
+            string productName = cartRepository.GetById(id).Product.Title;
 
             int itemCount = cartRepository.RemoveFromCart(id, cartId);
 
             // Display the confirmation message
             var results = new ShoppingCartRemoveViewModel
             {
-                Message = "Товар <<" + Server.HtmlEncode(tovarName) +
+                Message = "Товар <<" + Server.HtmlEncode(productName) +
                     ">>был удален из корзины.",
                 CartTotal = cartRepository.GetTotal(cartId),
                 CartCount = cartRepository.GetCount(cartId),

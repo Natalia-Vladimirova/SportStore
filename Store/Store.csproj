@@ -115,16 +115,16 @@
     </Compile>
     <Compile Include="Helpers\CartHelper.cs" />
     <Compile Include="Mappers\CartMappers.cs" />
-    <Compile Include="Mappers\CategMappers.cs" />
+    <Compile Include="Mappers\CategoryMappers.cs" />
     <Compile Include="Mappers\OrderDetailMappers.cs" />
     <Compile Include="Mappers\OrderMappers.cs" />
-    <Compile Include="Mappers\TovarMappers.cs" />
+    <Compile Include="Mappers\ProductMappers.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Cart.cs" />
-    <Compile Include="Models\Categ.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
-    <Compile Include="Models\Tovar.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ShoppingCartRemoveViewModel.cs" />
     <Compile Include="ViewModels\ShoppingCartViewModel.cs" />

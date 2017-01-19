@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Store.Models.Tovar>
+﻿@model IEnumerable<Store.Models.Product>
 @{
     ViewBag.Title = "Show compare";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,14 +28,14 @@
             <th></th>
         </tr>
     @foreach(var item in Model){
-            <tr id="@item.TovarId">
+            <tr id="@item.ProductId">
                 <td><img src="@Url.Content(item.Image)"/></td>
                 <td>@Truncate(item.Title, 25)</td>
                 <td>@item.Price</td>
                 <td>@item.Amount</td>
                 <td>@Truncate(item.Description, 50)</td>
                 <td>
-                    @Ajax.ActionLink("Delete", "DeleteCompare", "Store", new { id = item.TovarId }, new AjaxOptions { UpdateTargetId = item.TovarId.ToString(), InsertionMode = InsertionMode.Replace}, null)
+                    @Ajax.ActionLink("Delete", "DeleteCompare", "Store", new { id = item.ProductId }, new AjaxOptions { UpdateTargetId = item.ProductId.ToString(), InsertionMode = InsertionMode.Replace}, null)
                 </td>
             </tr>
     }

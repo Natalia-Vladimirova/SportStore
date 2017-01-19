@@ -1,4 +1,4 @@
-﻿@model Store.Models.Tovar
+﻿@model Store.Models.Product
 @{
     Layout = null;
 }
@@ -18,10 +18,10 @@
 <div class="shopId">
     <div class="shopIdHeader">
         <div class="shopIdPrice">@Truncate(Model.Title, 8)</div>
-        @Ajax.ActionLink("Compare", "AddCompare", "Store", new { id = Model.TovarId }, new AjaxOptions { UpdateTargetId = "compareProducts" }, new { @class = "buttoncompareadd" })
+        @Ajax.ActionLink("Compare", "AddCompare", "Store", new { id = Model.ProductId }, new AjaxOptions { UpdateTargetId = "compareProducts" }, new { @class = "buttoncompareadd" })
     </div>
     <div>
-        <a href="@Url.Action("Details", "Store", new {id = Model.TovarId})">
+        <a href="@Url.Action("Details", "Store", new {id = Model.ProductId})">
             <img src="@Url.Content(Model.Image)" />
         </a>
     </div>
@@ -29,6 +29,6 @@
         Description: @Truncate(Model.Description, 20)
         <br>
         Price: @Html.DisplayFor(modelItem => Model.Price) RUB.
-        <div class="buttonbuy">@Html.ActionLink("To cart", "AddToCart", "ShoppingCart", new { id = Model.TovarId }, "")</div>
+        <div class="buttonbuy">@Html.ActionLink("To cart", "AddToCart", "ShoppingCart", new { id = Model.ProductId }, "")</div>
     </div>
 </div>

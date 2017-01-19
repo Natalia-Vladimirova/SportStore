@@ -1,4 +1,4 @@
-﻿@model Store.Models.Categ
+﻿@model Store.Models.Category
 
 @{
     ViewBag.Title = "Admin-категория";
@@ -8,14 +8,14 @@
 <h2>Подробная информация:</h2>
 
 <fieldset>
-    <legend>Categ</legend>
+    <legend>Category</legend>
 
     <div class="display-label">Категория:</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Category)
+        @Html.DisplayFor(model => model.CategoryName)
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Изменить", "Edit", new { id=Model.CategId }) |
+    @Html.ActionLink("Изменить", "Edit", new { id=Model.CategoryId }) |
     @Html.ActionLink("Вернуться обратно", "Index")
 </p>

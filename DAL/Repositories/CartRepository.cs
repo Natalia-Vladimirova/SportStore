@@ -26,23 +26,18 @@ namespace DAL.Repositories
         {
             return context.Set<Cart>()
                 .FirstOrDefault(i => i.CartId == shoppingCartId);
-
-            /*var cart = new ShoppingCart();
-            cart.ShoppingCartId = cart.GetCartId(context);
-            return cart;*/
         }
 
-        public void AddToCart(Tovar tovar, string shoppingCartId)
+        public void AddToCart(Product product, string shoppingCartId)
         {
             var cartItem = context.Set<Cart>()
-                .SingleOrDefault(c => c.CartId == shoppingCartId && c.TovarId == tovar.TovarId);
+                .SingleOrDefault(c => c.CartId == shoppingCartId && c.ProductId == product.ProductId);
 
             if (cartItem == null)
             {
-                // Create a new cart item if no cart item exists
                 cartItem = new Cart
                 {
-                    TovarId = tovar.TovarId,
+                    ProductId = product.ProductId,
                     CartId = shoppingCartId,
                     Count = 1,
                     DateCreated = DateTime.Now
@@ -52,8 +47,6 @@ namespace DAL.Repositories
             }
             else
             {
-                // If the item does exist in the cart, 
-                // then add one to the quantity
                 cartItem.Count++;
             }
 
@@ -62,7 +55,6 @@ namespace DAL.Repositories
 
         public int RemoveFromCart(int id, string shoppingCartId)
         {
-            // Get the cart
             var cartItem = context.Set<Cart>()
                 .SingleOrDefault(cart => cart.CartId == shoppingCartId && cart.RecordId == id);
 
@@ -108,17 +100,10 @@ namespace DAL.Repositories
 
         public int GetCount(string shoppingCartId)
         {
-            // Get the count of each item in the cart and sum them up
             return context.Set<Cart>()
                 .Where(i => i.CartId == shoppingCartId)
                 .ToList()
                 .Sum(i => i.Count);
-
-            //int? count = (from cartItems in storeDB.Carts
-            //              where cartItems.CartId == ShoppingCartId
-            //              select (int?)cartItems.Count).Sum();
-            //// Return 0 if all entries are null
-            //return count ?? 0;
         }
 
         public int GetTotal(string shoppingCartId)
@@ -126,14 +111,7 @@ namespace DAL.Repositories
             return context.Set<Cart>()
                 .Where(i => i.CartId == shoppingCartId)
                 .ToList()
-                .Sum(i => i.Count * i.Tovar.Price);
-
-            /*int? total = (from cartItems in storeDB.Carts
-                          where cartItems.CartId == ShoppingCartId
-                          select cartItems.Count *
-                          cartItems.Tovar.Price).Sum();
-
-            return total;*/
+                .Sum(i => i.Count * i.Product.Price);
         }
 
         public int CreateOrder(Order order, string shoppingCartId)
@@ -147,14 +125,14 @@ namespace DAL.Repositories
             {
                 var orderDetail = new OrderDetail
                 {
-                    TovarId = item.TovarId,
+                    ProductId = item.ProductId,
                     OrderId = order.OrderId,
-                    UnitPrice = item.Tovar.Price,
+                    UnitPrice = item.Product.Price,
                     Quantity = item.Count
                 };
 
                 // Set the order total of the shopping cart
-                orderTotal += item.Count * item.Tovar.Price;
+                orderTotal += item.Count * item.Product.Price;
 
                 context.Set<OrderDetail>().Add(orderDetail);
 

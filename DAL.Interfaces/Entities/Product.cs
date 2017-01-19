@@ -2,9 +2,9 @@
 
 namespace DAL.Interfaces.Entities
 {
-    public class Tovar
+    public class Product
     {
-        public int TovarId { get; set; }
+        public int ProductId { get; set; }
 
         [Required]
         [StringLength(160)]
@@ -23,8 +23,8 @@ namespace DAL.Interfaces.Entities
         [StringLength(200)]
         public string Image { get; set; }
 
-        public int CategId { get; set; }
+        public int CategoryId { get; set; }
         
-        public virtual Categ Categ { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

@@ -15,39 +15,39 @@ namespace DAL.Repositories
             this.context = context;
         }
 
-        public IEnumerable<Categ> GetAll()
+        public IEnumerable<Category> GetAll()
         {
-            return context.Set<Categ>().ToList();
+            return context.Set<Category>().ToList();
         }
 
-        public Categ GetById(int id)
+        public Category GetById(int id)
         {
-            return context.Set<Categ>().FirstOrDefault(i => i.CategId == id);
+            return context.Set<Category>().FirstOrDefault(i => i.CategoryId == id);
         }
 
-        public void Create(Categ entity)
+        public void Create(Category entity)
         {
-            context.Set<Categ>().Add(entity);
+            context.Set<Category>().Add(entity);
             context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var category = context.Set<Categ>().FirstOrDefault(i => i.CategId == id);
+            var category = context.Set<Category>().FirstOrDefault(i => i.CategoryId == id);
 
             if (category == null) return;
 
-            context.Set<Categ>().Remove(category);
+            context.Set<Category>().Remove(category);
             context.SaveChanges();
         }
 
-        public void Update(Categ entity)
+        public void Update(Category entity)
         {
-            var category = context.Set<Categ>().FirstOrDefault(i => i.CategId == entity.CategId);
+            var category = context.Set<Category>().FirstOrDefault(i => i.CategoryId == entity.CategoryId);
 
             if (category == null) return;
 
-            category.Category = entity.Category;
+            category.CategoryName = entity.CategoryName;
             context.SaveChanges();
         }
     }

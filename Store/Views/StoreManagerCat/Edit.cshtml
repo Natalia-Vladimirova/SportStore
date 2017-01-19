@@ -1,4 +1,4 @@
-﻿@model Store.Models.Categ
+﻿@model Store.Models.Category
 
 @{
     ViewBag.Title = "Admin-категория";
@@ -13,16 +13,16 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>Categ</legend>
+        <legend>Category</legend>
 
-        @Html.HiddenFor(model => model.CategId)
+        @Html.HiddenFor(model => model.CategoryId)
 
         <div class="editor-label">
            Категория
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Category)
-            @Html.ValidationMessageFor(model => model.Category)
+            @Html.EditorFor(model => model.CategoryName)
+            @Html.ValidationMessageFor(model => model.CategoryName)
         </div>
         <br>
         <p>

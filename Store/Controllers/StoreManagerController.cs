@@ -29,44 +29,44 @@ namespace Store.Controllers
         public ActionResult Create()
         {
             var categories = categoryRepository.GetAll().Select(i => i.ToMvc());
-            ViewBag.CategId = new SelectList(categories, "CategId", "Category");
+            ViewBag.CategoryId = new SelectList(categories, "CategoryId", "CategoryName");
             return View();
         }
         
         [HttpPost]
-        public ActionResult Create(Tovar tovar)
+        public ActionResult Create(Product product)
         {
             if (ModelState.IsValid)
             {
-                productRepository.Create(tovar.ToDal());
+                productRepository.Create(product.ToDal());
                 return RedirectToAction("Index");  
             }
 
             var categories = categoryRepository.GetAll().Select(i => i.ToMvc());
-            ViewBag.CategId = new SelectList(categories, "CategId", "Category", tovar.CategId);
-            return View(tovar);
+            ViewBag.CategoryId = new SelectList(categories, "CategoryId", "CategoryName", product.CategoryId);
+            return View(product);
         }
         
         public ActionResult Edit(int id)
         {
             var product = productRepository.GetById(id).ToMvc();
             var categories = categoryRepository.GetAll().Select(i => i.ToMvc());
-            ViewBag.CategId = new SelectList(categories, "CategId", "Category", product.CategId);
+            ViewBag.CategoryId = new SelectList(categories, "CategoryId", "CategoryName", product.CategoryId);
             return View(product);
         }
         
         [HttpPost]
-        public ActionResult Edit(Tovar tovar)
+        public ActionResult Edit(Product product)
         {
             if (ModelState.IsValid)
             {
-                productRepository.Update(tovar.ToDal());
+                productRepository.Update(product.ToDal());
                 return RedirectToAction("Index");
             }
 
             var categories = categoryRepository.GetAll().Select(i => i.ToMvc());
-            ViewBag.CategId = new SelectList(categories, "CategId", "Category", tovar.CategId);
-            return View(tovar);
+            ViewBag.CategoryId = new SelectList(categories, "CategoryId", "CategoryName", product.CategoryId);
+            return View(product);
         }
         
         public ActionResult Delete(int id)

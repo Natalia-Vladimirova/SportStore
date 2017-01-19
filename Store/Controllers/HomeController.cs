@@ -6,7 +6,7 @@ namespace Store.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Добро пожаловать в Handmade Store!";
+            ViewBag.Message = "Добро пожаловать в Sport Store!";
             return View();
         }
 

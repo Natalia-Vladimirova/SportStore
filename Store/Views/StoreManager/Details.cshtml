@@ -1,4 +1,4 @@
-﻿@model Store.Models.Tovar
+﻿@model Store.Models.Product
 
 @{
     ViewBag.Title = "Admin-товар";
@@ -11,7 +11,7 @@
 <br><br>
 Название товара : @Html.DisplayFor(modelItem => Model.Title)
 <br>
-Категория : @Html.DisplayFor(modelItem => Model.Categ.Category)
+Категория : @Html.DisplayFor(modelItem => Model.Category.CategoryName)
 <br>
 Цена : @Html.DisplayFor(modelItem => Model.Price) руб.
 <br>
@@ -21,7 +21,7 @@
 <br>
 <br>
 <p>
-    @Html.ActionLink("Изменить", "Edit", new { id=Model.TovarId }) |
-    @Html.ActionLink("Удалить", "Delete", new { id=Model.TovarId }) |  
+    @Html.ActionLink("Изменить", "Edit", new { id=Model.ProductId }) |
+    @Html.ActionLink("Удалить", "Delete", new { id=Model.ProductId }) |  
     @Html.ActionLink("Вернуться обратно", "Index")
 </p>

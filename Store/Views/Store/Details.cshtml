@@ -1,4 +1,4 @@
-﻿@model Store.Models.Tovar
+﻿@model Store.Models.Product
 @{
     ViewBag.Title = "Details";
  }
@@ -9,7 +9,7 @@
 <br><br>
 Name : @Html.DisplayFor(modelItem => Model.Title)
 <br>
-Category : @Html.DisplayFor(modelItem => Model.Categ.Category)
+Category name : @Html.DisplayFor(modelItem => Model.Category.CategoryName)
 <br>
 Price : @Html.DisplayFor(modelItem => Model.Price) руб.
 <br>
@@ -18,6 +18,6 @@ Count : @Html.DisplayFor(modelItem => Model.Amount)
 Description : @Html.DisplayFor(modelItem => Model.Description)
 <br>
 <br>
-<div class="buttondetails">@Html.ActionLink("Buy", "AddToCart","ShoppingCart", new { id = Model.TovarId }, "")</div>
+<div class="buttondetails">@Html.ActionLink("Buy", "AddToCart","ShoppingCart", new { id = Model.ProductId }, "")</div>
 
 

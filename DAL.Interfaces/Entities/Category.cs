@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DAL.Interfaces.Entities
 {
-    public class Categ
+    public class Category
     {
-        public int CategId { get; set; }
+        public int CategoryId { get; set; }
 
         [Required]
         [StringLength(200)]
-        public string Category { get; set; }
+        public string CategoryName { get; set; }
 
-        public virtual List<Tovar> Tovars { get; set; }
+        public virtual List<Product> Products { get; set; }
     }
 }

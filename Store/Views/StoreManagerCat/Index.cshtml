@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Store.Models.Categ>
+﻿@model IEnumerable<Store.Models.Category>
 
 @helper Truncate(string input, int length)
 {
@@ -32,11 +32,11 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-             @Truncate(item.Category, 50)
+             @Truncate(item.CategoryName, 50)
         </td>
         <td>
-            @Html.ActionLink("Изменить", "Edit", new { id=item.CategId }) | 
-            @Html.ActionLink("Удалить", "Delete", new { id=item.CategId })
+            @Html.ActionLink("Изменить", "Edit", new { id=item.CategoryId }) | 
+            @Html.ActionLink("Удалить", "Delete", new { id=item.CategoryId })
         </td>
     </tr>
 }

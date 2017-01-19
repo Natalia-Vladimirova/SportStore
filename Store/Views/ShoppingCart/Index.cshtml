@@ -69,16 +69,16 @@ type="text/javascript"></script>
     {
         <tr id="row-@item.RecordId">
             <td>
-                @Html.ActionLink(item.Tovar.Title, "AddToCart", "ShoppingCart", new { id = item.TovarId }, "")
+                @Html.ActionLink(item.Product.Title, "AddToCart", "ShoppingCart", new { id = item.ProductId }, "")
             </td>
             <td>
-                @item.Tovar.Price
+                @item.Product.Price
             </td>
             <td id="item-count-@item.RecordId">
                 @item.Count
             </td>
             <td>
-                @Truncate(item.Tovar.Description, 10)
+                @Truncate(item.Product.Description, 10)
             </td>
             <td>
                 <a href="#" class="RemoveLink" data-id="@item.RecordId">Удалить из корзины</a>

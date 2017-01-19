@@ -15,35 +15,35 @@ namespace DAL.Repositories
             this.context = context;
         }
 
-        public IEnumerable<Tovar> GetAll()
+        public IEnumerable<Product> GetAll()
         {
-            return context.Set<Tovar>().ToList();
+            return context.Set<Product>().ToList();
         }
 
-        public Tovar GetById(int id)
+        public Product GetById(int id)
         {
-            return context.Set<Tovar>().FirstOrDefault(i => i.TovarId == id);
+            return context.Set<Product>().FirstOrDefault(i => i.ProductId == id);
         }
 
-        public void Create(Tovar entity)
+        public void Create(Product entity)
         {
-            context.Set<Tovar>().Add(entity);
+            context.Set<Product>().Add(entity);
             context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var product = context.Set<Tovar>().FirstOrDefault(i => i.TovarId == id);
+            var product = context.Set<Product>().FirstOrDefault(i => i.ProductId == id);
 
             if (product == null) return;
 
-            context.Set<Tovar>().Remove(product);
+            context.Set<Product>().Remove(product);
             context.SaveChanges();
         }
 
-        public void Update(Tovar entity)
+        public void Update(Product entity)
         {
-            var product = context.Set<Tovar>().FirstOrDefault(i => i.TovarId == entity.TovarId);
+            var product = context.Set<Product>().FirstOrDefault(i => i.ProductId == entity.ProductId);
 
             if (product == null) return;
 
@@ -52,7 +52,7 @@ namespace DAL.Repositories
             product.Amount = entity.Amount;
             product.Description = entity.Description;
             product.Image = entity.Image;
-            product.CategId = entity.CategId;
+            product.CategoryId = entity.CategoryId;
 
             context.SaveChanges();
         }

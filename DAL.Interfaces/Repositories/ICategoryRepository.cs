@@ -2,7 +2,7 @@
 
 namespace DAL.Interfaces.Repositories
 {
-    public interface ICategoryRepository : IRepository<Categ>
+    public interface ICategoryRepository : IRepository<Category>
     {
     }
 }

@@ -1,9 +1,9 @@
-﻿@model IEnumerable<Store.Models.Categ>
+﻿@model IEnumerable<Store.Models.Category>
 <ul id="sidebarlist">
-    @foreach (var categ in Model)
+    @foreach (var category in Model)
     {
         <li>
-            @Html.ActionLink(categ.Category, "Browse", "Store", new {param = categ.CategId}, null)
+            @Html.ActionLink(category.CategoryName, "Browse", "Store", new {param = category.CategoryId}, null)
         </li>
     }
 </ul>

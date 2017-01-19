@@ -14,7 +14,7 @@ namespace Store.Mappers
                 OrderDetailId = item.OrderDetailId,
                 Quantity = item.Quantity,
                 UnitPrice = item.UnitPrice,
-                TovarId = item.TovarId,
+                ProductId = item.ProductId,
                 OrderId = item.OrderId
             };
         }
@@ -28,9 +28,9 @@ namespace Store.Mappers
                 OrderDetailId = item.OrderDetailId,
                 Quantity = item.Quantity,
                 UnitPrice = item.UnitPrice,
-                TovarId = item.TovarId,
+                ProductId = item.ProductId,
                 OrderId = item.OrderId,
-                Tovar = item.Tovar.ToMvc(),
+                Product = item.Product.ToMvc(),
                 Order = item.Order.ToMvc()
             };
         }

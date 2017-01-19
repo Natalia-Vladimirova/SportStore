@@ -1,4 +1,4 @@
-﻿@model Store.Models.Tovar
+﻿@model Store.Models.Product
 
 @{
     ViewBag.Title = "Admin-товары";
@@ -15,14 +15,14 @@
     <fieldset>
         <legend>Товар</legend>
 
-        @Html.HiddenFor(model => model.TovarId)
+        @Html.HiddenFor(model => model.ProductId)
 
         <div class="editor-label">
             Категория
         </div>
         <div class="editor-field">
-            @Html.DropDownList("CategId", String.Empty)
-            @Html.ValidationMessageFor(model => model.CategId)
+            @Html.DropDownList("CategoryId", String.Empty)
+            @Html.ValidationMessageFor(model => model.CategoryId)
         </div>
 
         <div class="editor-label">

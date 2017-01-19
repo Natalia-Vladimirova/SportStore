@@ -1,4 +1,4 @@
-﻿@model Store.Models.Tovar
+﻿@model Store.Models.Product
 
 @{
     ViewBag.Title = "Admin-товар";
@@ -13,14 +13,14 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>Tovar</legend>
+        <legend>Product</legend>
 
         <div class="editor-label">
             Категория
         </div>
         <div class="editor-field">
-            @Html.DropDownList("CategId", String.Empty)
-            @Html.ValidationMessageFor(model => model.CategId)
+            @Html.DropDownList("CategoryId", String.Empty)
+            @Html.ValidationMessageFor(model => model.CategoryId)
         </div>
 
         <div class="editor-label">
