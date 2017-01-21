@@ -6,7 +6,7 @@ namespace DAL.Interfaces.Repositories
     {
         Order GetById(int id);
 
-        void Create(Order entity);
+        int Create(Order entity);
 
         void Delete(int id);
 

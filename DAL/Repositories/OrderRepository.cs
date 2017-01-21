@@ -19,10 +19,11 @@ namespace DAL.Repositories
             return context.Set<Order>().FirstOrDefault(i => i.OrderId == id);
         }
 
-        public void Create(Order entity)
+        public int Create(Order entity)
         {
             context.Set<Order>().Add(entity);
             context.SaveChanges();
+            return entity.OrderId;
         }
 
         public void Delete(int id)

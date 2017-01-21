@@ -18,49 +18,49 @@ namespace Store.Models
         [ScaffoldColumn(false)]
         public string Username { get; set; }
 
-        [Required(ErrorMessage = "Введите имя")]
-        [DisplayName("Имя")]
+        [Required(ErrorMessage = "First name is required")]
+        [DisplayName("First name")]
         [StringLength(160)]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Введите фамилию")]
-        [DisplayName("Фамилия")]
+        [Required(ErrorMessage = "Last name is required")]
+        [DisplayName("Last name")]
         [StringLength(160)]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Введите адрес")]
+        [Required(ErrorMessage = "Address is required")]
         [StringLength(100)]
-        [DisplayName("Улица")]
+        [DisplayName("Address")]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "Введите город")]
+        [Required(ErrorMessage = "City is required")]
         [StringLength(50)]
-        [DisplayName("Город")]
+        [DisplayName("City")]
         public string City { get; set; }
 
-        [Required(ErrorMessage = "Введите район")]
+        [Required(ErrorMessage = "District is required")]
         [StringLength(50)]
-        [DisplayName("Район")]
+        [DisplayName("District")]
         public string State { get; set; }
 
-        [Required(ErrorMessage = "Требуется почтовый индекс")]
-        [DisplayName("Почтовый индекс")]
+        [Required(ErrorMessage = "Post-code is required")]
+        [DisplayName("Post-code")]
         [StringLength(6)]
         public string PostalCode { get; set; }
 
-        [Required(ErrorMessage = "Введите страну")]
+        [Required(ErrorMessage = "Country is required")]
         [StringLength(50)]
-        [DisplayName("Страна")]
+        [DisplayName("Country")]
         public string Country { get; set; }
 
-        [Required(ErrorMessage = "Введите номер телефона")]
+        [Required(ErrorMessage = "Phone is required")]
         [StringLength(13)]
-        [DisplayName("Телефон")]
+        [DisplayName("Phone")]
         public string Phone { get; set; }
 
-        [Required(ErrorMessage = "Введите Email")]
+        [Required(ErrorMessage = "Email is required")]
         [DisplayName("Email")]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}",ErrorMessage = "Неправильный Email")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Incorrect email")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 

@@ -6,16 +6,16 @@ namespace Store.Models
     {
         public int ProductId { get; set; }
 
-        [Required(ErrorMessage = "Требуется название товара")]
+        [Required(ErrorMessage = "Product title is required")]
         [StringLength(160)]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Введите цену")]
-        [Range(1, 500000, ErrorMessage = "Цена должна быть от 1 до 500000 руб.")]
+        [Required(ErrorMessage = "Price is required")]
+        [Range(1, 500000, ErrorMessage = "Price must be between 1 and 500000")]
         public int Price { get; set; }
 
-        [Required(ErrorMessage = "Введите количество")]
-        [Range(1, 1000, ErrorMessage = "Количество должно быть от 1 до 1000 штук(метров)")]
+        [Required(ErrorMessage = "Amount is required")]
+        [Range(1, 1000, ErrorMessage = "Amount must be between 1 and 1000 items (metres)")]
         public int Amount { get; set; }
 
         [StringLength(200)]

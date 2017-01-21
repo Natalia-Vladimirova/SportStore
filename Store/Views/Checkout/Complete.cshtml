@@ -1,9 +1,10 @@
 ﻿@model int
 @{
-    ViewBag.Title = "Заказ оформлен";
+    ViewBag.Title = "The order has been placed";
 }
+
 <br />
-<h3>Спасибо за заказ! Номер вашего заказа: @Model</h3>
+<h3>Thank you for your order! The number of your order: @Model</h3>
 <br />
 
-@Html.ActionLink("История заказов", "UserCart","Checkout", new { nameparam = User.Identity.Name }, "")
+@Html.ActionLink("Orders history", "UserCart", "Checkout", new { username = User.Identity.Name }, "")
