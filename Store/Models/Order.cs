@@ -67,6 +67,6 @@ namespace Store.Models
         [ScaffoldColumn(false)]
         public int Total { get; set; }
 
-        public virtual List<OrderDetail> OrderDetails { get; set; }
+        public IEnumerable<OrderDetail> OrderDetails { get; set; }
     }
 }

@@ -9,18 +9,13 @@ using Store.Models;
 namespace Store.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class StoreManagerCatController : Controller
+    public class CategoryController : Controller
     {
         private readonly ICategoryRepository categoryRepository = new CategoryRepository(new StoreDbContext());
 
         public ViewResult Index()
         {
             return View(categoryRepository.GetAll().Select(i => i.ToMvc()));
-        }
-        
-        public ViewResult Details(int id)
-        {
-            return View(categoryRepository.GetById(id).ToMvc());
         }
         
         public ActionResult Create()

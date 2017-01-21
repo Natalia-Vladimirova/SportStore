@@ -12,19 +12,19 @@
      }
 } 
 @{
-    ViewBag.Title = "Admin-категории";
+    ViewBag.Title = "Admin-category";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <br>
 <p>
-    @Html.ActionLink("Создать новую категорию", "Create")
+    @Html.ActionLink("Create a new category", "Create")
 </p>
 <br>
 <div class="adminTabCat">
 <table>
     <tr>
         <th>
-            Категории:
+            Kategories:
         </th>
         <th></th>
     </tr>
@@ -35,8 +35,8 @@
              @Truncate(item.CategoryName, 50)
         </td>
         <td>
-            @Html.ActionLink("Изменить", "Edit", new { id=item.CategoryId }) | 
-            @Html.ActionLink("Удалить", "Delete", new { id=item.CategoryId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.CategoryId }) | 
+            @Html.ActionLink("Delete", "Delete", new { id=item.CategoryId })
         </td>
     </tr>
 }

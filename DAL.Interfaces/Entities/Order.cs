@@ -49,6 +49,6 @@ namespace DAL.Interfaces.Entities
 
         public int Total { get; set; }
 
-        public virtual List<OrderDetail> OrderDetails { get; set; }
+        public virtual IEnumerable<OrderDetail> OrderDetails { get; set; }
     }
 }

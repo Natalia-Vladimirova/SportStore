@@ -107,9 +107,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
-    <Compile Include="Controllers\StoreManagerCatController.cs" />
-    <Compile Include="Controllers\StoreManagerController.cs" />
-    <Compile Include="Controllers\StoreManagerUserController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -126,8 +126,8 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\ShoppingCartRemoveViewModel.cs" />
-    <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
+    <Compile Include="Models\ShoppingCartRemoveViewModel.cs" />
+    <Compile Include="Models\ShoppingCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Store.mdf" />
@@ -249,28 +249,27 @@
     <Content Include="Views\Store\Index.cshtml" />
     <Content Include="Views\Store\Details.cshtml" />
     <Content Include="Views\Store\CategMenu.cshtml" />
-    <Content Include="Views\StoreManager\Index.cshtml" />
-    <Content Include="Views\StoreManager\Details.cshtml" />
-    <Content Include="Views\StoreManager\Create.cshtml" />
-    <Content Include="Views\StoreManager\Edit.cshtml" />
-    <Content Include="Views\StoreManager\Delete.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\Delete.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\CartSummary.cshtml" />
     <Content Include="Views\Checkout\AddressAndPayment.cshtml" />
     <Content Include="Views\Checkout\Complete.cshtml" />
     <Content Include="Views\Store\Browse.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
-    <Content Include="Views\StoreManagerCat\Index.cshtml" />
-    <Content Include="Views\StoreManagerCat\Details.cshtml" />
-    <Content Include="Views\StoreManagerCat\Create.cshtml" />
-    <Content Include="Views\StoreManagerCat\Edit.cshtml" />
-    <Content Include="Views\StoreManagerCat\Delete.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
     <Content Include="Views\Checkout\UserCart.cshtml" />
     <Content Include="Views\Checkout\UserCartDetails.cshtml" />
-    <Content Include="Views\StoreManagerUser\UserCart.cshtml" />
-    <Content Include="Views\StoreManagerUser\UserCartDetails.cshtml" />
-    <Content Include="Views\StoreManagerUser\Index.cshtml" />
-    <Content Include="Views\StoreManagerUser\Delete.cshtml" />
+    <Content Include="Views\Order\UserCart.cshtml" />
+    <Content Include="Views\Order\UserCartDetails.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\Delete.cshtml" />
     <Content Include="Views\Store\Search.cshtml" />
     <Content Include="Views\Store\ShowCompare.cshtml" />
     <Content Include="Views\Store\_CompareProducts.cshtml" />

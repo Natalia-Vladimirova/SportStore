@@ -1,4 +1,5 @@
-﻿using Store.Models;
+﻿using System.Linq;
+using Store.Models;
 using Dal = DAL.Interfaces.Entities;
 
 namespace Store.Mappers

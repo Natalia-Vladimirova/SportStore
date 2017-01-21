@@ -9,7 +9,7 @@ using Store.Models;
 namespace Store.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class StoreManagerUserController : Controller
+    public class OrderController : Controller
     {
         private readonly IOrderRepository orderRepository = new OrderRepository(new StoreDbContext());
         private readonly IOrderDetailRepository orderDetailRepository = new OrderDetailRepository(new StoreDbContext());
@@ -19,16 +19,17 @@ namespace Store.Controllers
             return View(orderDetailRepository.GetAll().Select(i => i.ToMvc()));
         }
 
-        public ActionResult UserCart(string nameparam)
+        public ActionResult UserCart(string username)
         {
-            ViewBag.param = nameparam;
-            return View(orderDetailRepository.GetAll().Select(i => i.ToMvc()));
+            ViewBag.Username = username;
+            return View(orderDetailRepository.GetUserOrders(username).Select(i => i.ToMvc()));
         }
 
-        public ActionResult UserCartDetails(int idparam)
+        public ActionResult UserCartDetails(int id)
         {
-            ViewBag.param = idparam;
-            return View(orderDetailRepository.GetAll().Select(i => i.ToMvc()));
+            var order = orderRepository.GetById(id).ToMvc();
+            order.OrderDetails = orderDetailRepository.GetByOrderId(id).Select(i => i.ToMvc());
+            return View(order);
         }
         
         public ActionResult Delete(int id)

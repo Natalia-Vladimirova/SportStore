@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Store.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "Users - Admin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Choose a user to view user's orders: </h2>
+<table>
+    @foreach (var username in Model.Select(i => i.Order.Username).Distinct())
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(username, "UserCart", "Order", new { username = username }, "")
+            </td>
+        </tr>
+        <tr><td>---------------------------------</td></tr>
+    }
+</table>

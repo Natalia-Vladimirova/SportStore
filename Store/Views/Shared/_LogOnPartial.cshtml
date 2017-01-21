@@ -1,8 +1,11 @@
-﻿@if(Request.IsAuthenticated) {
-    
-    <text> <p>Добро пожаловать, <strong>@Html.ActionLink(User.Identity.Name, "UserCart","Checkout", new { nameparam = User.Identity.Name }, "")</strong></p>
-     @Html.ActionLink("Выход", "LogOff", "Account") </text>
+﻿@if (Request.IsAuthenticated)
+{
+    <text>
+        <p>Welcome, <strong>@Html.ActionLink(User.Identity.Name, "UserCart", "Checkout", new {nameparam = User.Identity.Name}, "")</strong></p>
+        @Html.ActionLink("Logout", "LogOff", "Account") 
+    </text>
 }
-else {
-    @: @Html.ActionLink("Вход", "LogOn", "Account") 
+else
+{
+    @: @Html.ActionLink("Login", "LogOn", "Account") 
 }

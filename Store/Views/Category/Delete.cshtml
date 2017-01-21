@@ -1,0 +1,21 @@
+﻿@model Store.Models.Category
+
+@{
+    ViewBag.Title = "Admin-category";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Delete the category:</h2>
+<div>
+    @Html.ActionLink("Back", "Index")
+</div>
+<br />  
+
+<p>Are you sure you want to delete the category <strong>"@Model.CategoryName"</strong> ?</p>
+<br />
+
+@using (Html.BeginForm())
+{
+    <p>
+        <input class="buttonsubmit" type="submit" value="Delete"/>
+    </p>
+}

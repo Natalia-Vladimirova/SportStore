@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -21,28 +21,31 @@
                     <li>@Html.Partial("_LogOnPartial")</li> 
                 </ul>
             </div>
-                <div class="logo">
-                    Handmade <span>Store</span>                    
-                </div>
+            <div class="logo">
+                <img src="@Url.Content("~/Content/cart1.png")"/>
+            </div>
         
             <br class="clearfloat" />
 
             <div id="navcontainer">
                 <ul id="navlist">
-                   <li class="first"><a href="@Url.Content("~")" id="current">Главная</a></li>
-                    <li>@Html.ActionLink("XML", "Myxml", "Store")</li>
-                   <li>@Html.ActionLink("Контакты", "About", "Home")</li>
+                    <li class="first"><a href="@Url.Content("~")" id="current">Main</a></li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    @if (Request.IsAuthenticated && User.IsInRole("Administrator"))
+                    {
+                        <li>@Html.ActionLink("Admin", "Index", "Product")</li>
+                    }
                 </ul>
             </div>
         </div>
         <!-- end #header -->
         <!-- begin #sidebar1 -->
         <div id="sidebar1">
-            <h2>Каталог таблиц</h2>
+            <h2>Catalogues</h2>
             <ul id="sidebarlist">
-                <li>@Html.ActionLink("Товары", "Index", "StoreManager")</li>
-                <li>@Html.ActionLink("Категории", "Index", "StoreManagerCat")</li>
-                <li>@Html.ActionLink("Заказы", "Index", "StoreManagerUser")</li>
+                <li>@Html.ActionLink("Products", "Index", "Product")</li>
+                <li>@Html.ActionLink("Categories", "Index", "Category")</li>
+                <li>@Html.ActionLink("Orders", "Index", "Order")</li>
             </ul>
         </div>
         <!-- end #sidebar1 -->
@@ -61,7 +64,7 @@
     <div id="footer">
         <div class="footerBody">
             <div class="copyright">
-                Copyright &copy; @DateTime.Now.Year  Store
+                Copyright &copy; @DateTime.Now.Year  Sport Store.
             </div>
         </div>
     </div>

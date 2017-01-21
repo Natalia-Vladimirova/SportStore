@@ -1,0 +1,19 @@
+﻿@model Store.Models.Order
+
+@{
+    ViewBag.Title = "Order - Admin";
+}
+
+<h2>Delete the order:</h2>
+<div>
+    @Html.ActionLink("Back", "UserCart", "Order", new { username = Model.Username }, "")
+</div>
+<br />
+
+<h3>Are you sure you want to delete the order # <strong>@Model.OrderId</strong> ?</h3>
+
+@using (Html.BeginForm()) {
+    <p>
+        <input class="buttonsubmit" type="submit" value="Delete" />
+    </p>
+}

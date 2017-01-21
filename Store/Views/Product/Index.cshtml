@@ -2,39 +2,43 @@
 
 @helper Truncate(string input, int length)
  {
-    if (input.Length <= length) {
+    if (input.Length <= length)
+    {
         @input
-    } else {
+    }
+    else
+    {
         @input.Substring(0, length)<text>...</text>
     }
-} 
+}
 
 @{
-    ViewBag.Title = "Admin-товары";
+    ViewBag.Title = "Products - Admin";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <br>
 <p>
-    @Html.ActionLink("Создать новый товар", "Create")
+    @Html.ActionLink("Create a new product", "Create")
 </p>
 <br>
 <div class="adminTab">
     <table>
         <tr>
-            <th>Картинка</th>
-            <th>Название</th>
-            <th>Количество</th>
-            <th>Цена</th>
-            <th>Описание</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Price</th>
+            <th>Description</th>
             <th></th>
         </tr>
 
-@foreach (var item in Model)
+        @foreach (var item in Model)
         {
             <tr>
                 @Html.HiddenFor(modelItem => item.ProductId)
                 <td>
-                    <div class="adminImg"><img src="@Url.Content(item.Image)" /> </div>
+                    <div class="adminImg"><img src="@Url.Content(item.Image)"/>
+                    </div>
                 </td>
                 <td>
                     @Truncate(item.Title, 20)
@@ -47,14 +51,13 @@
                 </td>
                 <td>
                     @Truncate(item.Description, 20)
-               </td>
-            <td>
-                @Html.ActionLink("Изменить", "Edit", new { id=item.ProductId }) |
-                @Html.ActionLink("Подробнее", "Details", new { id=item.ProductId }) |
-                @Html.ActionLink("Удалить", "Delete", new { id=item.ProductId })
-            </td>
-         </tr>
-}
-
-</table>
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new {id = item.ProductId}) |
+                    @Html.ActionLink("Details", "Details", new {id = item.ProductId}) |
+                    @Html.ActionLink("Delete", "Delete", new {id = item.ProductId})
+                </td>
+            </tr>
+        }
+    </table>
 </div>

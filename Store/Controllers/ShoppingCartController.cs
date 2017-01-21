@@ -3,9 +3,9 @@ using System.Web.Mvc;
 using DAL;
 using DAL.Interfaces.Repositories;
 using DAL.Repositories;
-using Store.ViewModels;
 using Store.Helpers;
 using Store.Mappers;
+using Store.Models;
 
 namespace Store.Controllers
 {

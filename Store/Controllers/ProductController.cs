@@ -9,7 +9,7 @@ using Store.Models;
 namespace Store.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class StoreManagerController : Controller
+    public class ProductController : Controller
     {
         private readonly IProductRepository productRepository = new ProductRepository(new StoreDbContext());
         private readonly ICategoryRepository categoryRepository = new CategoryRepository(new StoreDbContext());

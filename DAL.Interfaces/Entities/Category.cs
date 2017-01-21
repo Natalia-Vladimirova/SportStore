@@ -11,6 +11,6 @@ namespace DAL.Interfaces.Entities
         [StringLength(200)]
         public string CategoryName { get; set; }
 
-        public virtual List<Product> Products { get; set; }
+        public virtual IEnumerable<Product> Products { get; set; }
     }
 }

@@ -1,0 +1,48 @@
+﻿@model Store.Models.Order
+@{
+    ViewBag.Title = "Order - Admin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h4>Info about the order # @Model.OrderId. <span>(Order creation date @Html.DisplayFor(model => model.OrderDate))</span></h4>
+
+<div class="UserTab">
+    <div>
+        @Html.ActionLink("Back", "UserCart", "Order", new { username = Model.Username }, "")
+        @Html.ActionLink("Delete the order", "Delete", "Order", new { id = Model.OrderId }, "")
+    </div>
+    <br />
+    <table>
+        <tr>
+            <td>Product name </td>
+            <td>Quantity </td>
+            <td>Price </td>
+        </tr>
+
+        @foreach (var item in Model.OrderDetails)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => item.Product.Title)</td>
+                <td>@Html.DisplayFor(model => item.Quantity)</td>
+                <td>@Html.DisplayFor(model => item.UnitPrice)</td>
+            </tr>
+        }
+
+        <tr>
+            <td class="total">Total price: </td>
+            <td></td>
+            <td class="total"> @Model.OrderDetails.Sum(i => i.Quantity * i.UnitPrice) руб.</td>
+        </tr>
+    </table>
+    <br/>
+
+    <p>Recipient: @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</p>
+    <p>Address:
+        @Html.DisplayFor(model => model.Country),
+        region @Html.DisplayFor(model => model.State),
+        city @Html.DisplayFor(model => model.City),
+        @Html.DisplayFor(model => model.Address),
+        Post-code: @Html.DisplayFor(model => model.PostalCode).
+    </p>
+    <p>Phone: @Html.DisplayFor(model => model.Phone)</p>
+</div>

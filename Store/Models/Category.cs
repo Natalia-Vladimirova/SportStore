@@ -11,6 +11,6 @@ namespace Store.Models
         [StringLength(200)]
         public string CategoryName { get; set; }
 
-        public virtual List<Product> Products { get; set; }
+        public IEnumerable<Product> Products { get; set; }
     }
 }

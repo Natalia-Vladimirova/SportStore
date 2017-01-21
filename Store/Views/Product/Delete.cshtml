@@ -1,0 +1,21 @@
+﻿@model Store.Models.Product
+
+@{
+    ViewBag.Title = "Product - Admin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Delete the product:</h2>
+<div>
+    @Html.ActionLink("Back to all", "Index")
+</div>
+<br />
+
+<p>Are you sure you want to delete the product <strong>"@Model.Title"</strong> ?</p>
+<br />
+
+@using (Html.BeginForm())
+{
+    <p>
+        <input class="buttonsubmit" type="submit" value="Delete"/>
+    </p>
+}

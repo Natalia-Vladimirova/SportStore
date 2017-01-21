@@ -1,22 +1,28 @@
 ﻿@model Store.Models.Product
 
 @{
-    ViewBag.Title = "Admin-товар";
+    ViewBag.Title = "Product - Admin";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Создать новый товар:</h2>
+<h2>Edit the product:</h2>
+<div>
+    @Html.ActionLink("Back to all", "Index")
+</div>
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Product</legend>
 
+        @Html.HiddenFor(model => model.ProductId)
+
         <div class="editor-label">
-            Категория
+            Category
         </div>
         <div class="editor-field">
             @Html.DropDownList("CategoryId", String.Empty)
@@ -24,7 +30,7 @@
         </div>
 
         <div class="editor-label">
-           Название товара
+            Product name
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Title)
@@ -32,7 +38,7 @@
         </div>
 
         <div class="editor-label">
-            Цена
+            Price
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Price)
@@ -40,7 +46,7 @@
         </div>
 
         <div class="editor-label">
-            Количество
+            Amount
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Amount)
@@ -48,7 +54,7 @@
         </div>
 
         <div class="editor-label">
-            Описание
+            Description
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Description)
@@ -56,19 +62,15 @@
         </div>
 
         <div class="editor-label">
-            Картиинка
+            Image
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Image)
             @Html.ValidationMessageFor(model => model.Image)
         </div>
-
+        <br>
         <p>
-            <input class="buttonsubmit" type="submit" value="Создать" />
+            <input class="buttonsubmit" type="submit" value="Save"/>
         </p>
     </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Назад", "Index")
-</div>
