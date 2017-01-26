@@ -1,16 +1,5 @@
 ﻿@model IEnumerable<Store.Models.Category>
 
-@helper Truncate(string input, int length)
-{
-     if (input.Length <= length)
-     {
-        @input
-     }
-     else
-     {
-        @input.Substring(0, length)<text>...</text>
-     }
-} 
 @{
     ViewBag.Title = "Admin-category";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -32,7 +21,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-             @Truncate(item.CategoryName, 50)
+             @Html.Truncate(item.CategoryName, 50)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CategoryId }) | 

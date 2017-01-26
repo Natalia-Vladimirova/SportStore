@@ -3,21 +3,9 @@
     Layout = null;
 }
 
-@helper Truncate(string input, int length)
-{
-    if (input.Length <= length)
-    {
-         @input
-    }
-    else
-    {
-         @input.Substring(0, length)<text>...</text>
-    }
-}
-
 <div class="shopId">
     <div class="shopIdHeader">
-        <div class="shopIdPrice">@Truncate(Model.Title, 8)</div>
+        <div class="shopIdPrice">@Html.Truncate(Model.Title, 8)</div>
         @Ajax.ActionLink("Compare", "AddCompare", "Store", new { id = Model.ProductId }, new AjaxOptions { UpdateTargetId = "compareProducts" }, new { @class = "buttoncompareadd" })
     </div>
     <div>
@@ -26,9 +14,9 @@
         </a>
     </div>
     <div class="shopIdTitle">
-        Description: @Truncate(Model.Description, 20)
+        Description: @Html.Truncate(Model.Description, 20)
         <br>
         Price: @Html.DisplayFor(modelItem => Model.Price) RUB.
-        <div class="buttonbuy">@Html.ActionLink("To cart", "AddToCart", "ShoppingCart", new { id = Model.ProductId }, "")</div>
+        <div class="buttonbuy">@Ajax.ActionLink("To cart", "AddToCart", "ShoppingCart", new { id = Model.ProductId }, new AjaxOptions {UpdateTargetId = "cart-status" })</div>
     </div>
 </div>

@@ -30,7 +30,7 @@ a:hover {
 
 .logo img{
     float:right;
-    padding:0 0 0 790px;
+    padding:0 0 0 220px;
     max-height:85px;
     max-width:85px;
 }
@@ -533,3 +533,22 @@ fieldset {
         list-style: none;
     }
 /*--------------------------------------------*/
+
+.bottom-cart {
+    border-radius: 5px;
+    position: fixed;
+    bottom: 5px;
+    left: 55px;
+    width: 140px;
+    height: 40px;
+    background-color: white;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 30px;
+}
+
+.bottom-cart a {
+        font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}

@@ -3,15 +3,6 @@
     ViewBag.Title = "Show compare";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@helper Truncate(string input, int length)
-{
-    if (input.Length <= length) {
-        @input
-    } else {
-        @input.Substring(0, length)<text>...</text>
-    }
-}
-
 
 <h2>Compare</h2>
 @if (Model.Any()){
@@ -30,10 +21,10 @@
     @foreach(var item in Model){
             <tr id="@item.ProductId">
                 <td><img src="@Url.Content(item.Image)"/></td>
-                <td>@Truncate(item.Title, 25)</td>
+                <td>@Html.Truncate(item.Title, 25)</td>
                 <td>@item.Price</td>
                 <td>@item.Amount</td>
-                <td>@Truncate(item.Description, 50)</td>
+                <td>@Html.Truncate(item.Description, 50)</td>
                 <td>
                     @Ajax.ActionLink("Delete", "DeleteCompare", "Store", new { id = item.ProductId }, new AjaxOptions { UpdateTargetId = item.ProductId.ToString(), InsertionMode = InsertionMode.Replace}, null)
                 </td>

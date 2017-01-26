@@ -1,17 +1,5 @@
 ﻿@model IEnumerable<Store.Models.Product>
 
-@helper Truncate(string input, int length)
- {
-    if (input.Length <= length)
-    {
-        @input
-    }
-    else
-    {
-        @input.Substring(0, length)<text>...</text>
-    }
-}
-
 @{
     ViewBag.Title = "Products - Admin";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -41,7 +29,7 @@
                     </div>
                 </td>
                 <td>
-                    @Truncate(item.Title, 20)
+                    @Html.Truncate(item.Title, 20)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Amount)
@@ -50,7 +38,7 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
-                    @Truncate(item.Description, 20)
+                    @Html.Truncate(item.Description, 20)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new {id = item.ProductId}) |

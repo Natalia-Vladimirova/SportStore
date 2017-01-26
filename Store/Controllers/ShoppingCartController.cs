@@ -30,27 +30,28 @@ namespace Store.Controllers
         public ActionResult AddToCart(int id)
         {
             var product = productRepository.GetById(id);
-
             string cartId = CartHelper.GetCartId(HttpContext);
             cartRepository.AddToCart(product, cartId);
 
-            return RedirectToAction("Index");
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_CartCount", cartRepository.GetCount(cartId));
+            }          
+            
+            return RedirectToAction("Index", "Store");
         }
 
         [HttpPost]
         public ActionResult RemoveFromCart(int id)
         {
-            string cartId = CartHelper.GetCartId(HttpContext);
+            var cartId = CartHelper.GetCartId(HttpContext);
+            var productName = cartRepository.GetById(id).Product.Title;
+            var itemCount = cartRepository.RemoveFromCart(id, cartId);
 
-            string productName = cartRepository.GetById(id).Product.Title;
-
-            int itemCount = cartRepository.RemoveFromCart(id, cartId);
-
-            // Display the confirmation message
             var results = new ShoppingCartRemoveViewModel
             {
-                Message = "Товар <<" + Server.HtmlEncode(productName) +
-                    ">>был удален из корзины.",
+                Message = "Product <<" + Server.HtmlEncode(productName) +
+                    ">>was removed.",
                 CartTotal = cartRepository.GetTotal(cartId),
                 CartCount = cartRepository.GetCount(cartId),
                 ItemCount = itemCount,
@@ -64,7 +65,7 @@ namespace Store.Controllers
         public ActionResult CartSummary()
         {
             string cartId = CartHelper.GetCartId(HttpContext);
-            return PartialView("CartSummary", cartRepository.GetCount(cartId));
+            return PartialView("_CartCount", cartRepository.GetCount(cartId));
         }
     }
 }

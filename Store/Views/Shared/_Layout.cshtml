@@ -14,93 +14,98 @@
     <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
 </head>
 <body>
+<div class="bottom-cart">
+    @Html.Action("CartSummary", "ShoppingCart")
+</div>
 <!--begin #container-->
 <div id="container">
-<!-- begin #header -->
-<div id="header">
-    <div>
-        <div class="items">             
-            <ul> 
-                <li>@Html.Partial("_LogOnPartial")</li>
-                <li>@Html.Action("CartSummary", "ShoppingCart")</li>  
+    <!-- begin #header -->
+    <div id="header">
+        <div>
+            <div class="items">
+                <ul>
+                    <li>@Html.Partial("_LogOnPartial")</li>
+                    @* <li>@Html.Action("CartSummary", "ShoppingCart")</li>*@
+                </ul>
+            </div>
+
+            <div class="logo">
+                <a href="@Url.Action("Index", "ShoppingCart")">
+                    <img src="@Url.Content("~/Content/cart1.png")" />
+                </a>
+            </div>
+        </div>
+
+        <br class="clearfloat"/>
+
+        <div id="navcontainer">
+            <ul id="navlist">
+                <li class="first"><a href="@Url.Content("~")" id="current">Main</a></li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                @if (Request.IsAuthenticated && User.IsInRole("Administrator"))
+                {
+                    <li>@Html.ActionLink("Admin", "Index", "Product")</li>
+                }
+                <li class="search">
+                    <a>
+                        @using (Html.BeginForm("Search", "Store", FormMethod.Post, null))
+                        {
+                            <input class="searcharea" type="text" name="see" id="see"/>
+                            <input class="buttonsearch" type="submit" value="Search"/>
+                        }
+                    </a>
+                </li>
             </ul>
         </div>
-    
-        <div class="logo">
-            <img src="@Url.Content("~/Content/cart1.png")" />
+        <div class="headerPic">
+            <div class="headerDescription"></div>
+            <div class="headerDetails"></div>
         </div>
     </div>
-
-    <br class="clearfloat" />
-
-    <div id="navcontainer">
-        <ul id="navlist">
-           <li class="first"><a href="@Url.Content("~")" id="current">Main</a></li>
-           <li>@Html.ActionLink("About", "About", "Home")</li>
-            @if (Request.IsAuthenticated && User.IsInRole("Administrator"))
-            {
-                <li>@Html.ActionLink("Admin", "Index", "Product")</li>
-            }
-            <li class="search">
-                <a>
-                @using (Html.BeginForm("Search", "Store", FormMethod.Post, null))
-                {
-                    <input class="searcharea" type="text" name="see" id="see"/>
-                    <input class="buttonsearch" type="submit" value="Search"/>
-                }
-                </a>
-            </li>
-         </ul>
-     </div>
-     <div class="headerPic">
-        <div class="headerDescription"></div>
-        <div class="headerDetails"></div>
-     </div>
-</div>
-<!-- end #header -->
-<!-- begin #sidebar1 -->
-      <div id="sidebar1">
+    <!-- end #header -->
+    <!-- begin #sidebar1 -->
+    <div id="sidebar1">
         <h2>Categories</h2>
-         <ul>
-         <li>@Html.ActionLink("All products", "Index", "Store")</li>
-         </ul>
-             @{Html.RenderAction("CategMenu", "Store");}
-      </div>
-<!-- end #sidebar1 -->
-<!-- begin #mainContent -->
-    <div id="mainContent">         
+        <ul>
+            <li>@Html.ActionLink("All products", "Index", "Store")</li>
+        </ul>
+        @{Html.RenderAction("CategMenu", "Store");}
+    </div>
+    <!-- end #sidebar1 -->
+    <!-- begin #mainContent -->
+    <div id="mainContent">
         @RenderSection("featured", required: false)
         <section class="content-wrapper main-content clear-fix">
             @RenderBody()
-        </section>         
+        </section>
     </div>
-<!-- end #mainContent -->
-        <br class="clearfloat" />
+    <!-- end #mainContent -->
+    <br class="clearfloat"/>
 </div>
 <!-- end #container -->
 <!-- begin #footer -->
-    <div id="footer">
-        <div class="footerBody">
-            <div class="copyright">
-                Copyright &copy; @DateTime.Now.Year  Sport Store.
-            </div>
+<div id="footer">
+    <div class="footerBody">
+        <div class="copyright">
+            Copyright &copy; @DateTime.Now.Year Sport Store.
         </div>
     </div>
- <!-- end #footer -->
-@RenderSection("scripts", required: false)  
-    
-    <script type="text/javascript">
+</div>
+<!-- end #footer -->
+@RenderSection("scripts", required: false)
+
+<script type="text/javascript">
     $('#see').keyup(function() {
         var value = $(this).val();
-       
+
         $.ajax({
             url: '@Url.Action("Search", "Store")',
             data: { see: value },
-            success: function (dat) {
+            success: function(dat) {
                 $('#products').html(dat);
             }
         });
     })
-    </script>
+</script>
 </body>
 </html>

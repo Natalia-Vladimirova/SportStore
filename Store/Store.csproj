@@ -114,6 +114,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CartHelper.cs" />
+    <Compile Include="HtmlHelpers\Helpers.cs" />
     <Compile Include="Mappers\CartMappers.cs" />
     <Compile Include="Mappers\CategoryMappers.cs" />
     <Compile Include="Mappers\OrderDetailMappers.cs" />
@@ -255,7 +256,6 @@
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\Product\Delete.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
-    <Content Include="Views\ShoppingCart\CartSummary.cshtml" />
     <Content Include="Views\Checkout\AddressAndPayment.cshtml" />
     <Content Include="Views\Checkout\Complete.cshtml" />
     <Content Include="Views\Store\Browse.cshtml" />
@@ -275,6 +275,7 @@
     <Content Include="Views\Store\_CompareProducts.cshtml" />
     <Content Include="Views\Shared\_SingleProduct.cshtml" />
     <Content Include="Views\Shared\_ProductList.cshtml" />
+    <Content Include="Views\ShoppingCart\_CartCount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -289,6 +290,7 @@
       <Name>DAL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
