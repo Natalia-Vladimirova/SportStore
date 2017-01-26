@@ -24,16 +24,10 @@ namespace Store
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "My", // Имя маршрута
+                "Default", // Имя маршрута
                 "{controller}/{action}/{id}", // URL-адрес с параметрами
                 new { controller = "Store", action = "Index", id = UrlParameter.Optional } // Параметры по умолчанию
             );
-            routes.MapRoute(
-             "Default", // Имя маршрута
-             "{controller}/{action}/{id}", // URL-адрес с параметрами
-             new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Параметры по умолчанию
-);
-
         }
 
         protected void Application_Start()
