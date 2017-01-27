@@ -17,6 +17,10 @@
 <div class="bottom-cart">
     @Html.Action("CartSummary", "ShoppingCart")
 </div>
+<div class="bottom-compaare">
+    @*@Url.Action("CompareCount", "Store", null, null)*@
+    @{ Html.RenderAction("CompareCount", "Store", null); }
+</div>
 <!--begin #container-->
 <div id="container">
     <!-- begin #header -->

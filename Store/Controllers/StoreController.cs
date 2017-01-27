@@ -21,6 +21,11 @@ namespace Store.Controllers
             return View(productRepository.GetAll().Select(i => i.ToMvc()));
         }
 
+        public ActionResult CompareCount()
+        {
+            return PartialView("_CompareProducts", compare.Count);
+        }
+
         public ActionResult Search(string see)
         {
             var model = productRepository.GetAll().Where(x => x.Title.ToUpper().Contains(see.ToUpper())).Select(i => i.ToMvc()).ToList();
