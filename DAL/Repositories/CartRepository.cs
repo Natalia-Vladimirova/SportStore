@@ -19,26 +19,26 @@ namespace DAL.Repositories
         public Cart GetById(int id)
         {
             return context.Set<Cart>()
-                .FirstOrDefault(i => i.RecordId == id);
+                .FirstOrDefault(i => i.CartId == id);
         }
 
         public Cart GetCart(string shoppingCartId)
         {
             return context.Set<Cart>()
-                .FirstOrDefault(i => i.CartId == shoppingCartId);
+                .FirstOrDefault(i => i.UserName == shoppingCartId);
         }
 
         public void AddToCart(Product product, string shoppingCartId)
         {
             var cartItem = context.Set<Cart>()
-                .SingleOrDefault(c => c.CartId == shoppingCartId && c.ProductId == product.ProductId);
+                .SingleOrDefault(c => c.UserName == shoppingCartId && c.ProductId == product.ProductId);
 
             if (cartItem == null)
             {
                 cartItem = new Cart
                 {
                     ProductId = product.ProductId,
-                    CartId = shoppingCartId,
+                    UserName = shoppingCartId,
                     Count = 1,
                     DateCreated = DateTime.Now
                 };
@@ -56,7 +56,7 @@ namespace DAL.Repositories
         public int RemoveFromCart(int id, string shoppingCartId)
         {
             var cartItem = context.Set<Cart>()
-                .SingleOrDefault(cart => cart.CartId == shoppingCartId && cart.RecordId == id);
+                .SingleOrDefault(cart => cart.UserName == shoppingCartId && cart.CartId == id);
 
             int itemCount = 0;
 
@@ -81,7 +81,7 @@ namespace DAL.Repositories
         public void EmptyCart(string shoppingCartId)
         {
             var cartItems = context.Set<Cart>()
-                .Where(i => i.CartId == shoppingCartId);
+                .Where(i => i.UserName == shoppingCartId);
 
             foreach (var cartItem in cartItems)
             {
@@ -94,14 +94,14 @@ namespace DAL.Repositories
         public IEnumerable<Cart> GetCartItems(string shoppingCartId)
         {
             return context.Set<Cart>()
-                .Where(cart => cart.CartId == shoppingCartId)
+                .Where(cart => cart.UserName == shoppingCartId)
                 .ToList();
         }
 
         public int GetCount(string shoppingCartId)
         {
             return context.Set<Cart>()
-                .Where(i => i.CartId == shoppingCartId)
+                .Where(i => i.UserName == shoppingCartId)
                 .ToList()
                 .Sum(i => i.Count);
         }
@@ -109,7 +109,7 @@ namespace DAL.Repositories
         public int GetTotal(string shoppingCartId)
         {
             return context.Set<Cart>()
-                .Where(i => i.CartId == shoppingCartId)
+                .Where(i => i.UserName == shoppingCartId)
                 .ToList()
                 .Sum(i => i.Count * i.Product.Price);
         }
@@ -149,14 +149,24 @@ namespace DAL.Repositories
             return order.OrderId;
         }
 
-        // When a user has logged in, migrate their shopping cart to be associated with their username
         public void MigrateCart(string userName, string shoppingCartId)
         {
-            var shoppingCart = context.Set<Cart>().Where(c => c.CartId == shoppingCartId);
+            var shoppingCart = context.Set<Cart>().Where(c => c.UserName == shoppingCartId);
+            var existingUserCart = context.Set<Cart>().Where(c => c.UserName == userName).ToList();
 
             foreach (Cart item in shoppingCart)
             {
-                item.CartId = userName;
+                var existingCartProduct = existingUserCart.FirstOrDefault(i => i.ProductId == item.ProductId);
+
+                if (existingCartProduct == null)
+                {
+                    item.UserName = userName;
+                }
+                else
+                {
+                    existingCartProduct.Count += item.Count;
+                    context.Set<Cart>().Remove(item);
+                }
             }
 
             context.SaveChanges();

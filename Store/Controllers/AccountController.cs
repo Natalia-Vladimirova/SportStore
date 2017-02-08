@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.Security;
+using Store.Helpers;
 using Store.Models;
 
 namespace Store.Controllers
@@ -20,6 +21,8 @@ namespace Store.Controllers
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    CartHelper.MigrateCartWhenAuthorizing(HttpContext, model.UserName);
+
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 
                         && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") 
@@ -40,6 +43,7 @@ namespace Store.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
+            CartHelper.RemoveSessionCartIdOnLogout(HttpContext);
 
             return RedirectToAction("Index", "Store");
         }
@@ -60,6 +64,7 @@ namespace Store.Controllers
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, false);
+                    CartHelper.MigrateCartWhenAuthorizing(HttpContext, model.UserName);
                     return RedirectToAction("Index", "Store");
                 }
 

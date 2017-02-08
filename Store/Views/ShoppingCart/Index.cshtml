@@ -44,21 +44,21 @@
         </tr>
         @foreach (var item in Model.CartItems)
         {
-            <tr id="row-@item.RecordId">
+            <tr id="row-@item.CartId">
                 <td>
                     @Html.ActionLink(item.Product.Title, "AddToCart", "ShoppingCart", new { id = item.ProductId }, "")
                 </td>
                 <td>
                     @item.Product.Price
                 </td>
-                <td id="item-count-@item.RecordId">
+                <td id="item-count-@item.CartId">
                     @item.Count
                 </td>
                 <td>
                     @Html.Truncate(item.Product.Description, 10)
                 </td>
                 <td>
-                    <a href="#" class="RemoveLink" data-id="@item.RecordId">Delete from cart</a>
+                    <a href="#" class="RemoveLink" data-id="@item.CartId">Delete from cart</a>
                 </td>
             </tr>
         }

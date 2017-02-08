@@ -5,10 +5,9 @@ namespace Store.Models
 {
     public class Cart
     {
-        [Key]
-        public int RecordId { get; set; }
+        public int CartId { get; set; }
 
-        public string CartId { get; set; }
+        public string UserName { get; set; }
 
         public int Count { get; set; }
 

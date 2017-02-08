@@ -11,8 +11,8 @@ namespace Store.Mappers
 
             return new Dal.Cart
             {
-                RecordId = item.RecordId,
                 CartId = item.CartId,
+                UserName = item.UserName,
                 ProductId = item.ProductId,
                 Count = item.Count,
                 DateCreated = item.DateCreated
@@ -25,8 +25,8 @@ namespace Store.Mappers
 
             return new Cart
             {
-                RecordId = item.RecordId,
                 CartId = item.CartId,
+                UserName = item.UserName,
                 ProductId = item.ProductId,
                 Count = item.Count,
                 DateCreated = item.DateCreated,
