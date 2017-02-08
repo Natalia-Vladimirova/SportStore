@@ -22,15 +22,14 @@
                 </ul>
             </div>
             <div class="logo">
-                <img src="@Url.Content("~/Content/cart1.png")"/>
+                <img src="@Url.Content("~/Content/cart.png")"/>
             </div>
         
             <br class="clearfloat" />
 
             <div id="navcontainer">
                 <ul id="navlist">
-                    <li class="first"><a href="@Url.Content("~")" id="current">Main</a></li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li class="first">@Html.ActionLink("Main", "Index", "Store", new {}, new { id = "current" })</li>
                     @if (Request.IsAuthenticated && User.IsInRole("Administrator"))
                     {
                         <li>@Html.ActionLink("Admin", "Index", "Product")</li>

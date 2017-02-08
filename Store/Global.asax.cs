@@ -24,9 +24,9 @@ namespace Store
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "Default", // Имя маршрута
-                "{controller}/{action}/{id}", // URL-адрес с параметрами
-                new { controller = "Store", action = "Index", id = UrlParameter.Optional } // Параметры по умолчанию
+                "Default",
+                "{controller}/{action}/{id}",
+                new { controller = "Store", action = "Index", id = UrlParameter.Optional }
             );
         }
 
