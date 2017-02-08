@@ -28,7 +28,7 @@ namespace Store.Controllers
                         return Redirect(returnUrl);
                     }
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Store");
                 }
 
                 ModelState.AddModelError("", "Username or password are incorrect.");
@@ -41,7 +41,7 @@ namespace Store.Controllers
         {
             FormsAuthentication.SignOut();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Store");
         }
         
         public ActionResult Register()
@@ -60,7 +60,7 @@ namespace Store.Controllers
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Store");
                 }
 
                 ModelState.AddModelError("", ErrorCodeToString(createStatus));
