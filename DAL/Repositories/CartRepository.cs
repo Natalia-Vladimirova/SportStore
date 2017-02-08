@@ -78,19 +78,6 @@ namespace DAL.Repositories
             return itemCount;
         }
 
-        public void EmptyCart(string shoppingCartId)
-        {
-            var cartItems = context.Set<Cart>()
-                .Where(i => i.UserName == shoppingCartId);
-
-            foreach (var cartItem in cartItems)
-            {
-                context.Set<Cart>().Remove(cartItem);
-            }
-
-            context.SaveChanges();
-        }
-
         public IEnumerable<Cart> GetCartItems(string shoppingCartId)
         {
             return context.Set<Cart>()
@@ -167,6 +154,19 @@ namespace DAL.Repositories
                     existingCartProduct.Count += item.Count;
                     context.Set<Cart>().Remove(item);
                 }
+            }
+
+            context.SaveChanges();
+        }
+
+        private void EmptyCart(string shoppingCartId)
+        {
+            var cartItems = context.Set<Cart>()
+                .Where(i => i.UserName == shoppingCartId);
+
+            foreach (var cartItem in cartItems)
+            {
+                context.Set<Cart>().Remove(cartItem);
             }
 
             context.SaveChanges();

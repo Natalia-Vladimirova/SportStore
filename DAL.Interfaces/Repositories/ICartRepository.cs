@@ -12,9 +12,7 @@ namespace DAL.Interfaces.Repositories
         void AddToCart(Product product, string shoppingCartId);
 
         int RemoveFromCart(int id, string shoppingCartId);
-
-        void EmptyCart(string shoppingCartId);
-
+        
         IEnumerable<Cart> GetCartItems(string shoppingCartId);
 
         int GetCount(string shoppingCartId);
