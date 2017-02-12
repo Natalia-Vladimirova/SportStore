@@ -87,7 +87,7 @@ background: transparent;
 	font-size:14px;
 }
 .headerPic {
-	background:url(images/sport6.png) no-repeat left top;
+	background:url(sport.png) no-repeat left top;
     background-size: cover;
 	max-height:220px;
 	width:1000px;
