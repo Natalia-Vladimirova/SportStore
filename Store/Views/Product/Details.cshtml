@@ -6,7 +6,7 @@
 }
 
 <div class="shopId">
-    <div><img src="@Url.Content(Model.Image)" /> </div>
+    <div><img src="@Url.Content("/Content/Images/" + Model.Image)" /> </div>
 </div>
 <br><br>
 Product name : @Html.DisplayFor(modelItem => Model.Title)

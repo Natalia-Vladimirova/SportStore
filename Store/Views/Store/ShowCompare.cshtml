@@ -20,7 +20,7 @@
         </tr>
     @foreach(var item in Model){
             <tr id="@item.ProductId">
-                <td><img src="@Url.Content(item.Image)"/></td>
+                <td><img src="@Url.Content("/Content/Images/" + item.Image)"/></td>
                 <td>@Html.Truncate(item.Title, 25)</td>
                 <td>@item.Price</td>
                 <td>@item.Amount</td>

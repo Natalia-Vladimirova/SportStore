@@ -10,7 +10,7 @@
     </div>
     <div>
         <a href="@Url.Action("Details", "Store", new {id = Model.ProductId})">
-            <img src="@Url.Content(Model.Image)" />
+            <img src="@Url.Content("/Content/Images/" + Model.Image)" />
         </a>
     </div>
     <div class="shopIdTitle">

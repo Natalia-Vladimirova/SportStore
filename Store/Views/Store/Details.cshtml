@@ -4,14 +4,14 @@
  }
 
 <div class="shopId">
-    <div><img src="@Url.Content(Model.Image)" /> </div>
+    <div><img src="@Url.Content("/Content/Images/" + Model.Image)" /> </div>
 </div>
 <br><br>
 Name : @Html.DisplayFor(modelItem => Model.Title)
 <br>
 Category name : @Html.DisplayFor(modelItem => Model.Category.CategoryName)
 <br>
-Price : @Html.DisplayFor(modelItem => Model.Price) руб.
+Price : @Html.DisplayFor(modelItem => Model.Price)
 <br>
 Count : @Html.DisplayFor(modelItem => Model.Amount)
 <br>

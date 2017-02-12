@@ -566,7 +566,22 @@ fieldset {
 }
 
 .bottom-compaare a {
-        font-size: 15px;
+    font-size: 15px;
     font-weight: bold;
     text-decoration: none;
+}
+
+fieldset .imgLabel {
+    display: inline-block;
+    border: 1px solid #625e45;
+    color: black;
+    height: 17px;
+    width: 141px;
+}
+
+fieldset select {
+    display: block;
+    color: black;
+    height: 19px;
+    width: 143px;
 }

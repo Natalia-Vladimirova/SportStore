@@ -13,7 +13,7 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.ValidationSummary(true)
     <fieldset>
@@ -61,14 +61,19 @@
             @Html.ValidationMessageFor(model => model.Description)
         </div>
 
-        <div class="editor-label">
-            Image
+        <div class="editor-field">
+            <label for="uploadImage">
+                New image (if it is needed)
+            </label>
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Image)
-            @Html.ValidationMessageFor(model => model.Image)
+            <label for="uploadImage" class="imgLabel">Select a new image</label>
+            <input type="file" name="uploadImage" id="uploadImage" style="display: none;" />
+            @Html.ValidationMessage("uploadImage")
         </div>
-        <br>
+
+        @Html.HiddenFor(model => model.Image)
+
         <p>
             <input class="buttonsubmit" type="submit" value="Save"/>
         </p>

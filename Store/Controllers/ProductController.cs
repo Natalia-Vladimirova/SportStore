@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using DAL;
 using DAL.Interfaces.Repositories;
@@ -34,10 +37,24 @@ namespace Store.Controllers
         }
         
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product, HttpPostedFileBase uploadImage)
         {
+            if (uploadImage == null)
+            {
+                ModelState.AddModelError("uploadImage", "Choose an image");
+            }
+
             if (ModelState.IsValid)
             {
+                string filename = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + uploadImage.FileName;
+                string destPath = Server.MapPath("~/Content/Images/") + filename;
+                
+                using (var fileStream = new FileStream(destPath, FileMode.Create, FileAccess.Write))
+                {
+                    uploadImage.InputStream.CopyTo(fileStream);
+                }
+
+                product.Image = filename;
                 productRepository.Create(product.ToDal());
                 return RedirectToAction("Index");  
             }
@@ -56,10 +73,29 @@ namespace Store.Controllers
         }
         
         [HttpPost]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(Product product, HttpPostedFileBase uploadImage)
         {
             if (ModelState.IsValid)
             {
+                if (uploadImage != null)
+                {
+                    string filename = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + uploadImage.FileName;
+                    string destPath = Server.MapPath("~/Content/Images/") + filename;
+                    string oldFilePath = Server.MapPath("~/Content/Images/") + product.Image;
+
+                    using (var fileStream = new FileStream(destPath, FileMode.Create, FileAccess.Write))
+                    {
+                        uploadImage.InputStream.CopyTo(fileStream);
+                    }
+
+                    product.Image = filename;
+
+                    if (System.IO.File.Exists(oldFilePath))
+                    {
+                        System.IO.File.Delete(oldFilePath);
+                    }
+                }
+
                 productRepository.Update(product.ToDal());
                 return RedirectToAction("Index");
             }
@@ -76,8 +112,13 @@ namespace Store.Controllers
         }
         
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {            
+        public ActionResult DeleteConfirmed(int id, string image)
+        {
+            string imagePath = Server.MapPath("~/Content/Images/") + image;
+            if (System.IO.File.Exists(imagePath))
+            {
+                System.IO.File.Delete(imagePath);
+            }
             productRepository.Delete(id);
             return RedirectToAction("Index");
         }

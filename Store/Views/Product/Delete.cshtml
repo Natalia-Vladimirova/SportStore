@@ -15,6 +15,7 @@
 
 @using (Html.BeginForm())
 {
+    @Html.Hidden("image", Model.Image)
     <p>
         <input class="buttonsubmit" type="submit" value="Delete"/>
     </p>

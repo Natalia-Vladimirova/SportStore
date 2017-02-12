@@ -25,7 +25,7 @@
             <tr>
                 @Html.HiddenFor(modelItem => item.ProductId)
                 <td>
-                    <div class="adminImg"><img src="@Url.Content(item.Image)"/>
+                    <div class="adminImg"><img src="@Url.Content("/Content/Images/" + item.Image)"/>
                     </div>
                 </td>
                 <td>

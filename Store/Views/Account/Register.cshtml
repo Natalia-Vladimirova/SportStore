@@ -1,15 +1,15 @@
 ﻿@model Store.Models.RegisterModel
 
 @{
-    ViewBag.Title = "Регистрация";
+    ViewBag.Title = "Register";
 }
 
-<h2>Создать новую учетную запись</h2>
+<h2>Create an account</h2>
 <p class="formhead">
-    Используйте следующую форму для создания новой учетной записи. 
+    Use the next form to create an account.
 </p>
 <p>
-    Длина пароля не должна быть меньше @Membership.MinRequiredPasswordLength символов.
+    A password length must be more than @Membership.MinRequiredPasswordLength symbols.
 </p>
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
@@ -17,10 +17,10 @@
 <script src="@Url.Content("~/Scripts/jquery_test.js")" type="text/javascript"></script>
 
 @using (Html.BeginForm()) {
-    @Html.ValidationSummary(true, "Не удалось создать учетную запись. Исправьте ошибки и повторите попытку.")
+    @Html.ValidationSummary(true, "Unable to create an account. Check your data and try again.")
     <div>
         <fieldset>
-            <legend>Сведения учетной записи</legend>
+            <legend>Account info</legend>
 
             <div class="editor-label">
                 @Html.LabelFor(m => m.UserName)
@@ -55,7 +55,7 @@
             </div>
 
             <p>
-                <input id="buttonsubmitreg" type="submit" value="Регистрация" />
+                <input id="buttonsubmitreg" type="submit" value="Register" />
             </p>
         </fieldset>
     </div>
