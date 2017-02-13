@@ -116,12 +116,14 @@
     <Compile Include="HtmlHelpers\Helpers.cs" />
     <Compile Include="Mappers\CartMappers.cs" />
     <Compile Include="Mappers\CategoryMappers.cs" />
+    <Compile Include="Mappers\ComparisonMappers.cs" />
     <Compile Include="Mappers\OrderDetailMappers.cs" />
     <Compile Include="Mappers\OrderMappers.cs" />
     <Compile Include="Mappers\ProductMappers.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Comparison.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Product.cs" />

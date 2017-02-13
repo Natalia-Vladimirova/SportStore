@@ -10,9 +10,12 @@ namespace Store.Helpers
     {
         private const string CartSessionKey = "CartId";
         private static readonly ICartRepository cartRepository = new CartRepository(new StoreDbContext());
+        private static readonly IComparisonRepository comparisonRepository = new ComparisonRepository(new StoreDbContext());
 
         public static string GetCartId(HttpContextBase context)
         {
+            if (context?.Session == null) return null;
+
             if (context.Session[CartSessionKey] == null)
             {
                 if (!string.IsNullOrWhiteSpace(context.User.Identity.Name))
@@ -21,9 +24,7 @@ namespace Store.Helpers
                 }
                 else
                 {
-                    // Generate a new random GUID using System.Guid class
                     Guid tempCartId = Guid.NewGuid();
-                    // Send tempCartId back to client as a cookie
                     context.Session[CartSessionKey] = tempCartId.ToString();
                 }
             }
@@ -32,6 +33,7 @@ namespace Store.Helpers
 
         public static void MigrateCartWhenAuthorizing(HttpContextBase context, string username)
         {
+            if (context?.Session == null) return;
             if (string.IsNullOrWhiteSpace(username)) return;
 
             var cartId = GetCartId(context);
@@ -39,12 +41,14 @@ namespace Store.Helpers
             if (cartId != username)
             {
                 cartRepository.MigrateCart(username, cartId);
+                comparisonRepository.MigrateComparisons(username, cartId);
                 context.Session[CartSessionKey] = username;
             }
         }
 
         public static void RemoveSessionCartIdOnLogout(HttpContextBase context)
         {
+            if (context?.Session == null) return;
             context.Session[CartSessionKey] = null;
         }
     }

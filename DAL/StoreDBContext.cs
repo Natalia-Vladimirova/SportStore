@@ -14,5 +14,7 @@ namespace DAL
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<OrderDetail> OrderDetails { get; set; }
+
+        public DbSet<Comparison> Comparisons { get; set; }
     }
 }
