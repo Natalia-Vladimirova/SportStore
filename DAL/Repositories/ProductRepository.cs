@@ -49,7 +49,6 @@ namespace DAL.Repositories
 
             product.Title = entity.Title;
             product.Price = entity.Price;
-            product.Amount = entity.Amount;
             product.Description = entity.Description;
             product.Image = entity.Image;
             product.CategoryId = entity.CategoryId;

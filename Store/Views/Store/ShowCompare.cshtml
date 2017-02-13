@@ -14,7 +14,6 @@
             <th>Image</th>
             <th>Name</th>
             <th>Price</th>
-            <th>Count</th>
             <th>Description</th>
             <th></th>
         </tr>
@@ -23,7 +22,6 @@
                 <td><img src="@Url.Content("/Content/Images/" + item.Image)"/></td>
                 <td>@Html.Truncate(item.Title, 25)</td>
                 <td>@item.Price</td>
-                <td>@item.Amount</td>
                 <td>@Html.Truncate(item.Description, 50)</td>
                 <td>
                     @Ajax.ActionLink("Delete", "DeleteCompare", "Store", new { id = item.ProductId }, new AjaxOptions { UpdateTargetId = item.ProductId.ToString(), InsertionMode = InsertionMode.Replace}, null)

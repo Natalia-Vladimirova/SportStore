@@ -13,11 +13,7 @@ namespace Store.Models
         [Required(ErrorMessage = "Price is required")]
         [Range(1, 500000, ErrorMessage = "Price must be between 1 and 500000")]
         public int Price { get; set; }
-
-        [Required(ErrorMessage = "Amount is required")]
-        [Range(1, 1000, ErrorMessage = "Amount must be between 1 and 1000 items (metres)")]
-        public int Amount { get; set; }
-
+        
         [StringLength(200)]
         public string Description { get; set; }
 

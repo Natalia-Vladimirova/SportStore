@@ -14,7 +14,6 @@ namespace Store.Mappers
                 ProductId = item.ProductId,
                 Title = item.Title,
                 Price = item.Price,
-                Amount = item.Amount,
                 Description = item.Description,
                 Image = item.Image,
                 CategoryId = item.CategoryId
@@ -30,7 +29,6 @@ namespace Store.Mappers
                 ProductId = item.ProductId,
                 Title = item.Title,
                 Price = item.Price,
-                Amount = item.Amount,
                 Description = item.Description,
                 Image = item.Image,
                 CategoryId = item.CategoryId,

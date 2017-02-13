@@ -14,7 +14,6 @@
         <tr>
             <th>Image</th>
             <th>Name</th>
-            <th>Amount</th>
             <th>Price</th>
             <th>Description</th>
             <th></th>
@@ -25,14 +24,10 @@
             <tr>
                 @Html.HiddenFor(modelItem => item.ProductId)
                 <td>
-                    <div class="adminImg"><img src="@Url.Content("/Content/Images/" + item.Image)"/>
-                    </div>
+                    <div class="adminImg"><img src="@Url.Content("/Content/Images/" + item.Image)"/></div>
                 </td>
                 <td>
                     @Html.Truncate(item.Title, 20)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
