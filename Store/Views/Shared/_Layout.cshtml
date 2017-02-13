@@ -26,12 +26,7 @@
     <!-- begin #header -->
     <div id="header">
         <div>
-            <div class="items">
-                <ul>
-                    <li>@Html.Partial("_LogOnPartial")</li>
-                    @* <li>@Html.Action("CartSummary", "ShoppingCart")</li>*@
-                </ul>
-            </div>
+            @Html.Partial("_LogOnPartial")
 
             <div class="logo">
                 <a href="@Url.Action("Index", "ShoppingCart")">

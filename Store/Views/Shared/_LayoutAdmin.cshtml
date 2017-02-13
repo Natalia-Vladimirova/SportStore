@@ -16,15 +16,12 @@
     <div id="container">
         <!-- begin #header -->
         <div id="header">
-            <div class="items">             
-                <ul> 
-                    <li>@Html.Partial("_LogOnPartial")</li> 
-                </ul>
-            </div>
+            @Html.Partial("_LogOnPartial")
+
             <div class="logo">
                 <img src="@Url.Content("~/Content/cart.png")"/>
             </div>
-        
+
             <br class="clearfloat" />
 
             <div id="navcontainer">
