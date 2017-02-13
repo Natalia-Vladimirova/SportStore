@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using DAL;
 using DAL.Interfaces.Repositories;
-using DAL.Repositories;
 using Store.Mappers;
 using Store.Models;
 
@@ -11,8 +9,14 @@ namespace Store.Controllers
     [Authorize(Roles = "Administrator")]
     public class OrderController : Controller
     {
-        private readonly IOrderRepository orderRepository = new OrderRepository(new StoreDbContext());
-        private readonly IOrderDetailRepository orderDetailRepository = new OrderDetailRepository(new StoreDbContext());
+        private readonly IOrderRepository orderRepository;
+        private readonly IOrderDetailRepository orderDetailRepository;
+
+        public OrderController(IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository)
+        {
+            this.orderRepository = orderRepository;
+            this.orderDetailRepository = orderDetailRepository;
+        }
 
         public ActionResult Index()
         {

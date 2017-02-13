@@ -3,9 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DAL;
 using DAL.Interfaces.Repositories;
-using DAL.Repositories;
 using Store.Mappers;
 using Store.Models;
 
@@ -14,8 +12,14 @@ namespace Store.Controllers
     [Authorize(Roles = "Administrator")]
     public class ProductController : Controller
     {
-        private readonly IProductRepository productRepository = new ProductRepository(new StoreDbContext());
-        private readonly ICategoryRepository categoryRepository = new CategoryRepository(new StoreDbContext());
+        private readonly IProductRepository productRepository;
+        private readonly ICategoryRepository categoryRepository;
+
+        public ProductController(IProductRepository productRepository, ICategoryRepository categoryRepository)
+        {
+            this.productRepository = productRepository;
+            this.categoryRepository = categoryRepository;
+        }
 
         public ViewResult Index()
         {

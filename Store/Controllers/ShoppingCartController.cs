@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using DAL;
 using DAL.Interfaces.Repositories;
-using DAL.Repositories;
 using Store.Helpers;
 using Store.Mappers;
 using Store.Models;
@@ -11,8 +9,14 @@ namespace Store.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private readonly ICartRepository cartRepository = new CartRepository(new StoreDbContext());
-        private readonly IProductRepository productRepository = new ProductRepository(new StoreDbContext());
+        private readonly ICartRepository cartRepository;
+        private readonly IProductRepository productRepository;
+
+        public ShoppingCartController(ICartRepository cartRepository, IProductRepository productRepository)
+        {
+            this.cartRepository = cartRepository;
+            this.productRepository = productRepository;
+        }
 
         public ActionResult Index()
         {

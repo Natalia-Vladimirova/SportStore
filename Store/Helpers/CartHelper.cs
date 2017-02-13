@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Web;
-using DAL;
 using DAL.Interfaces.Repositories;
-using DAL.Repositories;
 
 namespace Store.Helpers
 {
     public class CartHelper
     {
         private const string CartSessionKey = "CartId";
-        private static readonly ICartRepository cartRepository = new CartRepository(new StoreDbContext());
-        private static readonly IComparisonRepository comparisonRepository = new ComparisonRepository(new StoreDbContext());
+        private readonly ICartRepository cartRepository;
+        private readonly IComparisonRepository comparisonRepository;
+
+        public CartHelper(ICartRepository cartRepository, IComparisonRepository comparisonRepository)
+        {
+            this.cartRepository = cartRepository;
+            this.comparisonRepository = comparisonRepository;
+        }
 
         public static string GetCartId(HttpContextBase context)
         {
@@ -31,7 +35,7 @@ namespace Store.Helpers
             return context.Session[CartSessionKey].ToString();
         }
 
-        public static void MigrateCartWhenAuthorizing(HttpContextBase context, string username)
+        public void MigrateCartWhenAuthorizing(HttpContextBase context, string username)
         {
             if (context?.Session == null) return;
             if (string.IsNullOrWhiteSpace(username)) return;
@@ -46,7 +50,7 @@ namespace Store.Helpers
             }
         }
 
-        public static void RemoveSessionCartIdOnLogout(HttpContextBase context)
+        public void RemoveSessionCartIdOnLogout(HttpContextBase context)
         {
             if (context?.Session == null) return;
             context.Session[CartSessionKey] = null;

@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using DAL;
 using DAL.Interfaces.Repositories;
-using DAL.Repositories;
 using Store.Mappers;
 using Store.Models;
 
@@ -11,7 +9,12 @@ namespace Store.Controllers
     [Authorize(Roles = "Administrator")]
     public class CategoryController : Controller
     {
-        private readonly ICategoryRepository categoryRepository = new CategoryRepository(new StoreDbContext());
+        private readonly ICategoryRepository categoryRepository;
+
+        public CategoryController(ICategoryRepository categoryRepository)
+        {
+            this.categoryRepository = categoryRepository;
+        }
 
         public ViewResult Index()
         {

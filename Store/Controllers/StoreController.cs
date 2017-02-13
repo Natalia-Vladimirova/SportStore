@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using DAL;
 using DAL.Interfaces.Repositories;
-using DAL.Repositories;
 using Store.Helpers;
 using Store.Mappers;
 using Store.Models;
@@ -11,9 +9,16 @@ namespace Store.Controllers
 {
     public class StoreController : Controller
     {
-        private readonly IProductRepository productRepository = new ProductRepository(new StoreDbContext());
-        private readonly ICategoryRepository categoryRepository = new CategoryRepository(new StoreDbContext());
-        private readonly IComparisonRepository comparisonRepository = new ComparisonRepository(new StoreDbContext());
+        private readonly IProductRepository productRepository;
+        private readonly ICategoryRepository categoryRepository;
+        private readonly IComparisonRepository comparisonRepository;
+
+        public StoreController(IProductRepository productRepository, ICategoryRepository categoryRepository, IComparisonRepository comparisonRepository)
+        {
+            this.productRepository = productRepository;
+            this.categoryRepository = categoryRepository;
+            this.comparisonRepository = comparisonRepository;
+        }
 
         public ActionResult Index()
         {

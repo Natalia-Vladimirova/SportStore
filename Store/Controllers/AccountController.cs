@@ -8,6 +8,13 @@ namespace Store.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly CartHelper cartHelper;
+
+        public AccountController(CartHelper cartHelper)
+        {
+            this.cartHelper = cartHelper;
+        }
+
         public ActionResult LogOn()
         {
             return View();
@@ -21,7 +28,7 @@ namespace Store.Controllers
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
-                    CartHelper.MigrateCartWhenAuthorizing(HttpContext, model.UserName);
+                    cartHelper.MigrateCartWhenAuthorizing(HttpContext, model.UserName);
 
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 
                         && returnUrl.StartsWith("/")
@@ -43,7 +50,7 @@ namespace Store.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
-            CartHelper.RemoveSessionCartIdOnLogout(HttpContext);
+            cartHelper.RemoveSessionCartIdOnLogout(HttpContext);
 
             return RedirectToAction("Index", "Store");
         }
@@ -64,7 +71,7 @@ namespace Store.Controllers
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, false);
-                    CartHelper.MigrateCartWhenAuthorizing(HttpContext, model.UserName);
+                    cartHelper.MigrateCartWhenAuthorizing(HttpContext, model.UserName);
                     return RedirectToAction("Index", "Store");
                 }
 

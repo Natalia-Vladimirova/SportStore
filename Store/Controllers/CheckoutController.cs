@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using DAL;
 using DAL.Interfaces.Repositories;
-using DAL.Repositories;
 using Store.Helpers;
 using Store.Mappers;
 using Store.Models;
@@ -13,11 +11,18 @@ namespace Store.Controllers
     [Authorize]
     public class CheckoutController : Controller
     {
-        private readonly ICartRepository cartRepository = new CartRepository(new StoreDbContext());
-        private readonly IOrderRepository orderRepository = new OrderRepository(new StoreDbContext());
-        private readonly IOrderDetailRepository orderDetailRepository = new OrderDetailRepository(new StoreDbContext());
+        private readonly ICartRepository cartRepository;
+        private readonly IOrderRepository orderRepository;
+        private readonly IOrderDetailRepository orderDetailRepository;
 
         private const string PromoCode = "FREE";
+
+        public CheckoutController(ICartRepository cartRepository, IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository)
+        {
+            this.cartRepository = cartRepository;
+            this.orderRepository = orderRepository;
+            this.orderDetailRepository = orderDetailRepository;
+        }
 
         public ActionResult AddressAndPayment()
         {
