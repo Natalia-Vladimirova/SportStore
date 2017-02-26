@@ -101,9 +101,9 @@ namespace Store.Controllers
             return View(items);
         }
 
-        public ActionResult Browse(int param)
+        public ActionResult Browse(int category)
         {
-            return View(productRepository.GetAll().Where(x => x.CategoryId == param).Select(i => i.ToMvc()).ToList());
+            return View(productRepository.GetAll().Where(x => x.CategoryId == category).Select(i => i.ToMvc()).ToList());
         }
 
         public ActionResult Details(int id)

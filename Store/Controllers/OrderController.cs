@@ -20,16 +20,16 @@ namespace Store.Controllers
 
         public ActionResult Index()
         {
-            return View(orderDetailRepository.GetAll().Select(i => i.ToMvc()));
+            return View(orderRepository.GetAll().Select(i => i.Username).Distinct());
         }
 
-        public ActionResult UserCart(string username)
+        public ActionResult UserOrders(string username)
         {
             ViewBag.Username = username;
-            return View(orderDetailRepository.GetUserOrders(username).Select(i => i.ToMvc()));
+            return View(orderRepository.GetUserOrders(username).Select(i => i.ToMvc()));
         }
 
-        public ActionResult UserCartDetails(int id)
+        public ActionResult UserOrderDetails(int id)
         {
             var order = orderRepository.GetById(id).ToMvc();
             order.OrderDetails = orderDetailRepository.GetByOrderId(id).Select(i => i.ToMvc());

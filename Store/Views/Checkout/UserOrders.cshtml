@@ -1,18 +1,18 @@
-﻿@model IEnumerable<Store.Models.OrderDetail>
+﻿@model IEnumerable<Store.Models.Order>
 @{
     ViewBag.Title = "Orders";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Orders of the user: @ViewBag.Username</h2>
+<h2>Orders of the user: @User.Identity.Name</h2>
 
 <table>
-    @foreach (var orderId in Model.Select(i => i.Order.OrderId).Distinct())
+    @foreach (var orderId in Model.Select(i => i.OrderId))
     {
         <tr>
             <td>
                 The order # @Html.DisplayFor(i => orderId)
-                @Html.ActionLink("Details", "UserCartDetails", "Checkout", new { id = orderId }, "")
+                @Html.ActionLink("Details", "UserOrderDetails", "Checkout", new { id = orderId }, "")
             </td>
         </tr>
         <tr><td>---------------------------------</td></tr>

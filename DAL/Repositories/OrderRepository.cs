@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using DAL.Interfaces.Entities;
 using DAL.Interfaces.Repositories;
@@ -14,9 +15,19 @@ namespace DAL.Repositories
             this.context = context;
         }
 
+        public IEnumerable<Order> GetAll()
+        {
+            return context.Set<Order>().ToList();
+        }
+
         public Order GetById(int id)
         {
             return context.Set<Order>().FirstOrDefault(i => i.OrderId == id);
+        }
+
+        public IEnumerable<Order> GetUserOrders(string username)
+        {
+            return context.Set<Order>().Where(i => i.Username == username).ToList();
         }
 
         public int Create(Order entity)
@@ -32,7 +43,15 @@ namespace DAL.Repositories
 
             if (order == null) return;
 
+            var orderDetails = context.Set<OrderDetail>().Where(i => i.OrderId == id);
+
+            foreach (var orderDetail in orderDetails)
+            {
+                context.Set<OrderDetail>().Remove(orderDetail);
+            }
+
             context.Set<Order>().Remove(order);
+            
             context.SaveChanges();
         }
 

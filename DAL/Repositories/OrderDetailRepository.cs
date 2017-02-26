@@ -25,11 +25,6 @@ namespace DAL.Repositories
             return context.Set<OrderDetail>().FirstOrDefault(i => i.OrderDetailId == id);
         }
 
-        public IEnumerable<OrderDetail> GetUserOrders(string username)
-        {
-            return context.Set<OrderDetail>().Where(i => i.Order.Username == username).ToList();
-        }
-
         public IEnumerable<OrderDetail> GetByOrderId(int orderId)
         {
             return context.Set<OrderDetail>().Where(i => i.OrderId == orderId).ToList();

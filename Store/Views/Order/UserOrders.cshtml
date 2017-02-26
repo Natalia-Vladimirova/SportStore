@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Store.Models.OrderDetail>
+﻿@model IEnumerable<Store.Models.Order>
 @{
     ViewBag.Title = "Orders - Admin";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -11,11 +11,11 @@
 <br />
 
 <table>
-    @foreach(var orderId in Model.Select(i => i.Order.OrderId).Distinct())
+    @foreach(var orderId in Model.Select(i => i.OrderId))
     {
         <tr>
             <td>The order # @Html.DisplayFor(i => orderId)
-                @Html.ActionLink("Info", "UserCartDetails", "Order", new { id = orderId }, "") |
+                @Html.ActionLink("Info", "UserOrderDetails", "Order", new { id = orderId }, "") |
                 @Html.ActionLink("Delete order", "Delete", "Order", new { id = orderId }, "")
             </td>
         </tr>

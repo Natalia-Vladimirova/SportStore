@@ -8,7 +8,7 @@
 
 <div class="UserTab">
     <div>
-        @Html.ActionLink("Back", "UserCart", "Checkout", new { username = Model.Username }, "")
+        @Html.ActionLink("Back", "UserOrders", "Checkout", new {}, "")
     </div>
     <br />
     <table>
@@ -30,19 +30,18 @@
         <tr>
             <td class="total">Total price: </td>
             <td></td>
-            <td class="total"> @Model.OrderDetails.Sum(i => i.Quantity * i.UnitPrice)</td>
+            <td class="total"> @Model.Total</td>
         </tr>
     </table>
     <br />
 
-    <p>Recipient: @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</p>
     <p>
-        Address:
-        @Html.DisplayFor(model => model.Country),
-        region @Html.DisplayFor(model => model.State),
-        city @Html.DisplayFor(model => model.City),
-        @Html.DisplayFor(model => model.Address),
-        Post-code: @Html.DisplayFor(model => model.PostalCode).
+        Recipient: @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName) <br />
+        Country: @Html.DisplayFor(model => model.Country) <br/>
+        Region: @Html.DisplayFor(model => model.State) <br/>
+        City: @Html.DisplayFor(model => model.City) <br/>
+        Address: @Html.DisplayFor(model => model.Address) <br/>
+        Post-code: @Html.DisplayFor(model => model.PostalCode) <br/>
+        Phone: @Html.DisplayFor(model => model.Phone)
     </p>
-    <p>Phone: @Html.DisplayFor(model => model.Phone)</p>
 </div>

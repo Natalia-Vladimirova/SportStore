@@ -4,7 +4,7 @@
         {
             <li>@Html.ActionLink("Logout", "LogOff", "Account")</li>
             <li>@Html.ActionLink("Change password", "ChangePassword", "Account")</li>
-            <li>Welcome, <strong>@Html.ActionLink(User.Identity.Name, "UserCart", "Checkout", new { username = User.Identity.Name }, "")</strong></li>
+            <li>Welcome, <strong>@Html.ActionLink(User.Identity.Name, "UserOrders", "Checkout", new {}, "")</strong></li>
         }
         else
         {

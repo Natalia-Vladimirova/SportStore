@@ -107,7 +107,6 @@ namespace DAL.Repositories
 
             var cartItems = GetCartItems(shoppingCartId);
 
-            // Iterate over the items in the cart, adding the order details for each
             foreach (var item in cartItems)
             {
                 var orderDetail = new OrderDetail
@@ -118,21 +117,17 @@ namespace DAL.Repositories
                     Quantity = item.Count
                 };
 
-                // Set the order total of the shopping cart
                 orderTotal += item.Count * item.Product.Price;
-
                 context.Set<OrderDetail>().Add(orderDetail);
-
             }
-            // Set the order's total to the orderTotal count
-            order.Total = orderTotal;
+
+            var existingOrder = context.Set<Order>().First(i => i.OrderId == order.OrderId);
+            existingOrder.Total = orderTotal;
 
             context.SaveChanges();
 
-            // Empty the shopping cart
             EmptyCart(shoppingCartId);
 
-            // Return the OrderId as the confirmation number
             return order.OrderId;
         }
 

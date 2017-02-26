@@ -60,7 +60,7 @@ namespace Store.Models
 
         [Required(ErrorMessage = "Email is required")]
         [DisplayName("Email")]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Incorrect email")]
+        [RegularExpression(@"^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.[a-zA-Z]+$", ErrorMessage = "Entered email is incorrect")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 

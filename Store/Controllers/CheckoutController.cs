@@ -32,14 +32,13 @@ namespace Store.Controllers
         [HttpPost]
         public ActionResult AddressAndPayment(Order order, string promoCode)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(order);
-            }
-
             if (!string.Equals(promoCode, PromoCode, StringComparison.InvariantCultureIgnoreCase))
             {
                 ModelState.AddModelError("PromoCode", "Incorrect promocode");
+            }
+
+            if (!ModelState.IsValid)
+            {
                 return View(order);
             }
 
@@ -65,18 +64,16 @@ namespace Store.Controllers
         
         public ActionResult Complete(int id)
         {
-            // Validate if customer owns this order
             bool isValid = orderRepository.OrderIsValid(id, User.Identity.Name);
             return isValid ? View(id) : View("Error");
         }
         
-        public ActionResult UserCart(string username)
+        public ActionResult UserOrders()
         {
-            ViewBag.Username = username;
-            return View(orderDetailRepository.GetUserOrders(username).Select(i => i.ToMvc()));
+            return View(orderRepository.GetUserOrders(User.Identity.Name).Select(i => i.ToMvc()));
         }
         
-        public ActionResult UserCartDetails(int id)
+        public ActionResult UserOrderDetails(int id)
         {
             var order = orderRepository.GetById(id).ToMvc();
             order.OrderDetails = orderDetailRepository.GetByOrderId(id).Select(i => i.ToMvc());

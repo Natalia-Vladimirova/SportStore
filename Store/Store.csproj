@@ -284,10 +284,10 @@
     <Content Include="Views\Category\Create.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Category\Delete.cshtml" />
-    <Content Include="Views\Checkout\UserCart.cshtml" />
-    <Content Include="Views\Checkout\UserCartDetails.cshtml" />
-    <Content Include="Views\Order\UserCart.cshtml" />
-    <Content Include="Views\Order\UserCartDetails.cshtml" />
+    <Content Include="Views\Checkout\UserOrders.cshtml" />
+    <Content Include="Views\Checkout\UserOrderDetails.cshtml" />
+    <Content Include="Views\Order\UserOrders.cshtml" />
+    <Content Include="Views\Order\UserOrderDetails.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Order\Delete.cshtml" />
     <Content Include="Views\Store\Search.cshtml" />

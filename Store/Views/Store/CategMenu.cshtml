@@ -3,7 +3,7 @@
     @foreach (var category in Model)
     {
         <li>
-            @Html.ActionLink(category.CategoryName, "Browse", "Store", new {param = category.CategoryId}, null)
+            @Html.ActionLink(category.CategoryName, "Browse", "Store", new {category = category.CategoryId}, null)
         </li>
     }
 </ul>
